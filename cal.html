@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Kalender</title>
+    <style>
+        /* Globalne style dla body w iframe, aby kalendarz był wyśrodkowany i wypełniał iframe */
+        body {
+            margin: 0;
+            overflow: hidden; /* Zapobiega przewijaniu wewnątrz iframe */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Wypełnia wysokość iframe */
+            width: 100vw;  /* Wypełnia szerokość iframe */
+            background: transparent; /* Upewnia się, że tło iframe jest przezroczyste */
+        }
+
+        /* Główny kontener kalendarza - obudowa (zmniejszona o połowę) */
+        .calendar-outer-casing {
+            width: 50px;  /* Szerokość gadżetu (100px / 2) */
+            height: 75px; /* Wysokość gadżetu (150px / 2) */
+            background-color: #f5f5dc; /* Kolor beżowy jak na zdjęciu */
+            border-radius: 4px; /* Lekko zaokrąglone rogi (8px / 2) */
+            /* Ulepszone cienie dla efektu obudowy - ZMNIEJSZONE GRUBOŚCI */
+            box-shadow:
+                0 0 0 3px #d0d0b0, /* Delikatna zewnętrzna ramka (6px / 2) */
+                0 0 0 6px #c0c0a0, /* Trochę ciemniejsza ramka dla głębi (12px / 2) */
+                0 0 7px rgba(0, 0, 0, 0.5), /* Ogólny cień pod spodem (15px / 2 = 7.5px, zaokrąglone) */
+                inset 0 0 4px rgba(255, 255, 255, 0.6); /* Wewnętrzne podświetlenie (8px / 2) */
+            display: flex;
+            flex-direction: column; /* Elementy w kolumnie */
+            justify-content: space-around; /* Rozłożenie elementów równomiernie */
+            align-items: center; /* Wyśrodkowanie w poziomie */
+            padding: 5px; /* Wewnętrzny odstęp (10px / 2) */
+            box-sizing: border-box; /* Zapewnia, że padding jest wliczony w szerokość/wysokość */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Impact', sans-serif; /* Czcionka "Gothic" - preferowane węższe */
+            overflow: hidden; /* Ukrywa elementy wychodzące poza obudowę */
+            position: relative; /* Dla pozycjonowania animowanych elementów */
+        }
+
+        /* Styl dla pojedynczej pozycji (dzień tygodnia, data, miesiąc) */
+        .calendar-display-slot {
+            width: 100%;
+            height: 17.5px; /* Zmniejszona wysokość slotu (35px / 2) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        .calendar-text {
+            font-size: 10px; /* Zmniejszony rozmiar czcionki (20px / 2) */
+            font-weight: bold;
+            color: black;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease-out;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Specjalny styl dla niedzieli */
+        .calendar-text.sunday {
+            color: darkred;
+        }
+
+        /* Dodatkowe style dla wizualnego oddzielenia slotów i daty numerycznej */
+        .calendar-display-slot:nth-child(2) { /* Slot dla daty numerycznej */
+            height: 30px; /* Zmniejszona wysokość (60px / 2) */
+            border-top: 1px solid #ccc; /* Linia oddzielająca (pozostawiono 1px dla widoczności) */
+            border-bottom: 1px solid #ccc; /* Linia oddzielająca (pozostawiono 1px dla widoczności) */
+            margin: 2px 0; /* Odstęp od góry i dołu (5px / 2 = 2.5px, zaokrąglone) */
+        }
+        .calendar-display-slot:nth-child(2) .calendar-text {
+            font-size: 16px; /* Zmniejszony rozmiar czcionki (32px / 2) */
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-outer-casing">
+        <div class="calendar-display-slot day-of-week-slot">
+            <span class="calendar-text day-of-week"></span>
+        </div>
+        <div class="calendar-display-slot date-slot">
+            <span class="calendar-text date-number"></span>
+        </div>
+        <div class="calendar-display-slot month-slot">
+            <span class="calendar-text month-name"></span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dayOfWeekElement = document.querySelector('.day-of-week');
+            const dateNumberElement = document.querySelector('.date-number');
+            const monthNameElement = document.querySelector('.month-name');
+
+            const daysOfWeek = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+            const months = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+
+            function updateCalendar() {
+                const now = new Date();
+                const dayIndex = now.getDay(); // 0 for Sunday, 1 for Monday, etc.
+                const date = now.getDate();
+                const monthIndex = now.getMonth();
+
+                // Dzień tygodnia
+                dayOfWeekElement.textContent = daysOfWeek[dayIndex];
+                // Ustawienie koloru dla niedzieli
+                if (dayIndex === 0) { // Niedziela
+                    dayOfWeekElement.classList.add('sunday');
+                } else {
+                    dayOfWeekElement.classList.remove('sunday');
+                }
+
+                // Data numeryczna
+                dateNumberElement.textContent = date;
+
+                // Nazwa miesiąca
+                monthNameElement.textContent = months[monthIndex];
+            }
+
+            // Uruchomienie aktualizacji kalendarza od razu
+            updateCalendar();
+
+            // Ustawienie interwału do aktualizacji kalendarza co minutę (lub częściej, jeśli potrzebne)
+            setInterval(updateCalendar, 60 * 1000); // Aktualizuj co minutę
+        });
+    </script>
+</body>
+</html>
