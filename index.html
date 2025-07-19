@@ -6,6 +6,20 @@
   <title>Danziger Chronograf – Strona Główna</title>
   <meta name="description" content="Danziger Chronograf – redakcyjny portal lokalny z historią, poradami i przewodnikiem przez Trójmiasto.">
   <style>
+    /* Definicja niestandardowej czcionki "Tannenberg modern" */
+    /* WAŻNE: Zastąp 'https://example.com/fonts/' rzeczywistą ścieżką do Twoich plików czcionek (tannenberg-modern.woff2 i tannenberg-modern.woff) */
+    /* Alternatywnie, dla testów, możesz wkleić kod Base64 bezpośrednio tutaj: */
+    @font-face {
+        font-family: 'Tannenberg modern';
+        src: url('https://example.com/fonts/tannenberg-modern.woff2') format('woff2'),
+             url('https://example.com/fonts/tannenberg-modern.woff') format('woff');
+        /* Przykład z Base64 (usuń powyższe linie url() i odkomentuj poniższe, wklejając swój kod): */
+        /* src: url(data:application/font-woff2;charset=utf-8;base64,[TUTAJ_WKLEJ_KOD_BASE64_WOFF2]) format('woff2'), */
+        /* url(data:application/font-woff;charset=utf-8;base64,[TUTAJ_WKLEJ_KOD_BASE64_WOFF]) format('woff'); */
+        font-weight: normal;
+        font-style: normal;
+    }
+
     /* Globalne style */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,11 +29,27 @@
         font-family: Georgia, serif;
     }
     header { background: #e5c58c; padding: 20px; text-align: center; }
-    header h1 { font-size: 2em; color: #000; }
-    nav.main-nav { background: #ddd; }
+    /* Zmiany dla nagłówka gazety */
+    header h1 {
+        font-size: 2.5em; /* Zmieniony rozmiar na bardziej odpowiedni dla nagłówka */
+        font-family: "Tannenberg modern", "FrutigerNextW1GRegular", "Frutiger", Arial, sans-serif; /* Nowa czcionka z fallbackami */
+        color: #000;
+        letter-spacing: 0.05em; /* Dodane rozstrzelenie liter */
+    }
+    nav.main-nav {
+        /* Usunięto background: #ddd; */
+    }
     nav.main-nav ul { list-style: none; display: flex; justify-content: center; white-space: nowrap; }
     nav.main-nav ul li { margin: 0 15px; }
-    nav.main-nav ul li a { text-decoration: none; color: #000; font-weight: bold; }
+    /* Zmiany dla menu głównego */
+    nav.main-nav ul li a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold; /* Zachowano pogrubienie */
+        font-family: "Frutiger", Arial, sans-serif; /* Zachowano czcionkę, która jest bezszeryfowa jak w menu hamburger */
+        font-size: 12px; /* Zmieniono rozmiar na 12px */
+        text-transform: uppercase; /* Zachowano wielkie litery */
+    }
 
     /* Style menu offcanvas */
     #menu-toggle { position: fixed; top:15px; left:15px; background:transparent; border:none; font-size:1.5em; cursor:pointer; z-index:1001; }
@@ -125,7 +155,7 @@
         font-family: 'Arial', sans-serif;
         margin-bottom: 20px;
         margin-left: auto; /* Przesuwa kontener do prawej */
-        margin-right: 10px; /* Zmieniono: Odstęp od prawej krawędzi sidebara dla wyrównania centrów */
+        margin-right: 10px; /* Odstęp od prawej krawędzi sidebara dla wyrównania centrów */
     }
 
     .thermometer-dial {
@@ -370,7 +400,7 @@
         font-family: 'Arial', sans-serif;
         margin-bottom: 0;
         margin-left: auto; /* Przesuwa kontener do prawej */
-        margin-right: 10px; /* Odstęp od prawej krawędzi sidebara dla wyrównania centrów */
+        margin-right: 10px; /* Odstęp od prawej krawwędzi sidebara dla wyrównania centrów */
     }
 
     .hygrometer-dial {
@@ -486,7 +516,55 @@
 
     /* Media queries dla responsywności */
     @media (max-width:768px) {
-      nav.main-nav { display:none; }
+      nav.main-nav { display:none; } /* Ukrywa główne menu na mniejszych ekranach */
+      .main-layout-wrapper {
+        flex-direction: column; /* Układ kolumnowy na małych ekranach */
+        margin: 10px; /* Zmniejszone marginesy */
+        max-width: 100%; /* Pełna szerokość */
+      }
+      .vertical-strip {
+        display: none; /* Ukryj pionowy pasek na urządzeniach mobilnych */
+      }
+      .main-content {
+        padding: 10px; /* Zmniejszony padding */
+        width: 100%; /* Pełna szerokość */
+        flex: none; /* Usuń flex grow */
+      }
+      .sidebar {
+        width: 100%; /* Pełna szerokość */
+        padding: 10px 4px; /* Dostosowany padding */
+        flex: none; /* Usuń flex grow */
+      }
+      .article p, .article img {
+        float: none; /* Usuń floaty */
+        width: 100%; /* Pełna szerokość */
+        margin-left: 0; /* Usuń margines */
+      }
+      .article img {
+        margin-top: 10px; /* Dodaj odstęp pod obrazkiem */
+      }
+      .clock-calendar-wrapper {
+        justify-content: center; /* Wyśrodkuj zegar i kalendarz */
+        margin-left: auto; /* Zapewnij wyśrodkowanie */
+        margin-right: auto; /* Zapewnij wyśrodkowanie */
+      }
+      .thermometer-container,
+      .barometer-container,
+      .hygrometer-container {
+        margin-left: auto; /* Wyśrodkuj gadżety */
+        margin-right: auto; /* Wyśrodkuj gadżety */
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8em; /* Mniejszy rozmiar czcionki nagłówka na bardzo małych ekranach, ale nadal czytelny */
+      }
+      #menu-toggle {
+        font-size: 1.2em; /* Mniejszy rozmiar ikony menu hamburger */
+        top: 10px;
+        left: 10px;
+      }
     }
   </style>
 </head>
@@ -515,10 +593,10 @@
     <ul>
       <li><a href="#artykul-redakcyjny">Artykuł Redakcyjny</a></li>
       <li><a href="#poradnik-prawny">Poradnik prawny</a></li>
-      <li><a href="#w-trojmiescie">W Trójmieście</a></li>
+      <li><a href="#w-trojmiescie">W Trójmiescie</a></li>
       <li><a href="#dobrze-na-dzis">Dobrze na dziś</a></li>
       <li><a href="#kartka-z-historii">Kartka z historii</a></li>
-      <li><a href="#cudzoziemcy-w-trojmiescie">Cudzoziemcy w Trójmieście</a></li>
+      <li><a href="#cudzoziemcy-w-trojmiescie">Cudzoziemcy w Trójmiescie</a></li>
       <li><a href="de/chronograf.html">Danziger Chronograf</a></li>
     </ul>
   </nav>
@@ -543,7 +621,7 @@
 
       <section id="w-trojmiescie" class="article">
         <a href="#w-trojmiescie" style="text-decoration: none; color: inherit; display: block;">
-          <h2>W Trójmieście</h2>
+          <h2>W Trójmiescie</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
           <img src="https://i.postimg.cc/DZy6wvhz/trojm.jpg" alt="Zdjęcie z Trójmiasta">
         </a>
@@ -567,13 +645,12 @@
 
       <section id="cudzoziemcy-w-trojmiescie" class="article">
         <a href="#cudzoziemcy-w-trojmiescie" style="text-decoration: none; color: inherit; display: block;">
-          <h2>Cudzoziemcy w Trójmieście</h2>
+          <h2>Cudzoziemcy w Trójmiescie</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
           <img src="https://i.postimg.cc/gjpgbV0f/cud1-web.jpg" alt="Zdjęcie dotyczące cudzoziemców w Trójmieście">
         </a>
       </section>
 
-      <!-- Nowe miejsce na reklamę -->
       <div class="ad-space" style="text-align: center; background: #eee; padding: 20px; margin: 30px 0;">
         Reklama: Tutaj możesz umieścić swoją reklamę
       </div>
@@ -594,7 +671,6 @@
         </a>
       </section>
 
-      <!-- Istniejące miejsce na reklamę przed Danziger Chronograf -->
       <div class="ad-space" style="text-align: center; background: #eee; padding: 20px; margin: 30px 0;">
         Reklama: Twoje miejsce na produkt
       </div>
@@ -612,9 +688,7 @@
 
     <div class="sidebar">
       <div class="ad-space">
-        <!-- Nowy kontener dla zegara i kalendarza -->
         <div class="clock-calendar-wrapper">
-            <!-- Iframe dla kalendarza (cal.html) -->
             <iframe
               src="cal.html"
               title="Vintage Calendar"
@@ -623,7 +697,6 @@
               onload="console.log('cal.html loaded successfully in iframe');"
               onerror="console.error('Error loading cal.html in iframe');">
             </iframe>
-            <!-- Iframe dla zegara (swiss.html) -->
             <iframe
               src="swiss.html"
               title="Swiss Railway Clock"
@@ -634,7 +707,6 @@
             </iframe>
         </div>
 
-        <!-- Kod termometru (100x100px) -->
         <div class="thermometer-container">
             <div class="thermometer-dial">
                 <svg class="svg-dial" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 598.4 598.4">
@@ -648,78 +720,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const thermometerNeedle = document.querySelector('.thermometer-needle');
-                const thermometerScaleContainer = document.querySelector('.thermometer-scale');
-
-                const minTemp = -40;
-                const maxTemp = 40;
-                const tempRange = maxTemp - minTemp;
-
-                const startAngle = -135;
-                const endAngle = 135;
-                const angleRange = endAngle - startAngle;
-
-                const OPENWEATHER_API_KEY = '4299e86ce701ae41b9de28f84e96002c';
-                const CITY_NAME = 'Gdansk';
-                const UNITS = 'metric';
-                const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-
-                function updateThermometer(temperature) {
-                    temperature = Math.max(minTemp, Math.min(maxTemp, temperature));
-                    const normalizedTemp = (temperature - minTemp) / tempRange;
-                    const rotationAngle = startAngle + (normalizedTemp * angleRange);
-                    thermometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
-                }
-
-                function generateThermometerScale() {
-                    for (let temp = minTemp; temp <= maxTemp; temp += 10) {
-                        const normalizedTemp = (temp - minTemp) / tempRange;
-                        const angle = startAngle + (normalizedTemp * angleRange);
-
-                        const markLabelDiv = document.createElement('div');
-                        markLabelDiv.classList.add('mark-label');
-                        markLabelDiv.style.transform = `rotate(${angle}deg)`;
-
-                        const labelSpan = document.createElement('span');
-                        labelSpan.textContent = temp;
-
-                        let verticalAdjust = '';
-                        if (temp < 0) {
-                            verticalAdjust = 'translateY(-1.5px)';
-                        }
-
-                        labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg) ${verticalAdjust}`;
-
-                        markLabelDiv.appendChild(labelSpan);
-                        thermometerScaleContainer.appendChild(markLabelDiv);
-                    }
-                }
-
-                async function fetchThermometerData() {
-                    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=${UNITS}&appid=${OPENWEATHER_API_KEY}`;
-
-                    try {
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const data = await response.json();
-                        console.log("Dane pogodowe (termometr):", data);
-
-                        const currentTemperature = data.main.temp;
-                        updateThermometer(currentTemperature);
-                    } catch (error) {
-                        console.error("Błąd pobierania danych pogodowych dla termometru:", error);
-                    }
-                }
-
-                generateThermometerScale();
-                fetchThermometerData();
-                setInterval(fetchThermometerData, REFRESH_INTERVAL_MS);
-            });
-        </script>
         <div class="barometer-container">
             <div class="barometer-dial">
                 <svg class="svg-dial" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 598.4 598.4">
@@ -733,82 +733,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const barometerNeedle = document.querySelector('.barometer-needle');
-                const barometerScaleContainer = document.querySelector('.barometer-scale');
-
-                const minPressure = 950;
-                const maxPressure = 1050;
-                const pressureRange = maxPressure - minPressure;
-
-                const startAngle = -135;
-                const endAngle = 135;
-                const angleRange = endAngle - startAngle;
-
-                const OPENWEATHER_API_KEY = '4299e86ce701ae41b9de28f84e96002c';
-                const CITY_NAME = 'Gdansk';
-                const UNITS = 'metric';
-                const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-
-                function updateBarometer(pressure) {
-                    pressure = Math.max(minPressure, Math.min(maxPressure, pressure));
-                    const normalizedPressure = (pressure - minPressure) / pressureRange;
-                    const rotationAngle = startAngle + (normalizedPressure * angleRange);
-                    barometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
-                }
-
-                function generateBarometerScale() {
-                    for (let pressure = minPressure; pressure <= maxPressure; pressure += 5) {
-                        const normalizedPressure = (pressure - minPressure) / pressureRange;
-                        const angle = startAngle + (normalizedPressure * angleRange);
-
-                        if (pressure % 25 === 0) {
-                            const markLabelDiv = document.createElement('div');
-                            markLabelDiv.classList.add('mark-label');
-                            markLabelDiv.style.transform = `rotate(${angle}deg)`;
-
-                            const labelSpan = document.createElement('span');
-                            labelSpan.textContent = pressure;
-                            labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg)`;
-
-                            markLabelDiv.appendChild(labelSpan);
-                            barometerScaleContainer.appendChild(markLabelDiv);
-                        } else {
-                            const minorTickDiv = document.createElement('div');
-                            minorTickDiv.classList.add('minor-tick');
-                            minorTickDiv.style.transform = `rotate(${angle}deg)`;
-
-                            const lineSpan = document.createElement('div');
-                            lineSpan.classList.add('line');
-                            minorTickDiv.appendChild(lineSpan);
-                            barometerScaleContainer.appendChild(minorTickDiv);
-                        }
-                    }
-                }
-
-                async function fetchBarometerData() {
-                    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=${UNITS}&appid=${OPENWEATHER_API_KEY}`;
-                    try {
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const data = await response.json();
-                        console.log("Dane pogodowe (barometr):", data);
-                        const currentPressure = data.main.pressure;
-                        updateBarometer(currentPressure);
-                    } catch (error) {
-                        console.error("Błąd pobierania danych pogodowych dla barometru:", error);
-                    }
-                }
-
-                generateBarometerScale();
-                fetchBarometerData();
-                setInterval(fetchBarometerData, REFRESH_INTERVAL_MS);
-            });
-        </script>
-
         <div class="hygrometer-container">
             <div class="hygrometer-dial">
                 <svg class="svg-dial" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 598.4 598.4">
@@ -821,79 +745,6 @@
                 <div class="hygrometer-center-dot"></div>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const hygrometerNeedle = document.querySelector('.hygrometer-needle');
-                const hygrometerScaleContainer = document.querySelector('.hygrometer-scale');
-
-                const barometerMinPressure = 950;
-                const barometerMaxPressure = 1050;
-                const barometerPressureRange = barometerMaxPressure - barometerMinPressure;
-                const barometerStartAngle = -135;
-                const barometerEndAngle = 135;
-                const barometerAngleRange = barometerEndAngle - barometerStartAngle;
-
-                const minHumidity = 0;
-                const maxHumidity = 100;
-                const humidityRange = maxHumidity - minHumidity;
-
-                const hygrometerStartAngle = barometerStartAngle;
-                const normalized1040hPa = (1040 - barometerMinPressure) / barometerPressureRange;
-                const hygrometerEndAngle = barometerStartAngle + (normalized1040hPa * barometerAngleRange);
-
-                const hygrometerAngleRange = hygrometerEndAngle - hygrometerStartAngle;
-
-                const OPENWEATHER_API_KEY = '4299e86ce701ae41b9de28f84e96002c';
-                const CITY_NAME = 'Gdansk';
-                const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-
-                function updateHygrometer(humidity) {
-                    humidity = Math.max(minHumidity, Math.min(maxHumidity, humidity));
-                    const normalizedHumidity = (humidity - minHumidity) / humidityRange;
-                    const rotationAngle = hygrometerStartAngle + (normalizedHumidity * hygrometerAngleRange);
-                    hygrometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
-                }
-
-                function generateHygrometerScale() {
-                    for (let hum = minHumidity; hum <= maxHumidity; hum += 10) {
-                        const normalizedHum = (hum - minHumidity) / humidityRange;
-                        const angle = hygrometerStartAngle + (normalizedHum * hygrometerAngleRange);
-
-                        const markLabelDiv = document.createElement('div');
-                        markLabelDiv.classList.add('mark-label');
-                        markLabelDiv.style.transform = `rotate(${angle}deg)`;
-
-                        const labelSpan = document.createElement('span');
-                        labelSpan.textContent = hum;
-                        labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg)`;
-
-                        markLabelDiv.appendChild(labelSpan);
-                        hygrometerScaleContainer.appendChild(markLabelDiv);
-                    }
-                }
-
-                async function fetchHygrometerData() {
-                    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${OPENWEATHER_API_KEY}`;
-                    try {
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const data = await response.json();
-                        console.log("Dane pogodowe (higrometr):", data);
-                        const currentHumidity = data.main.humidity;
-                        updateHygrometer(currentHumidity);
-                    } catch (error) {
-                        console.error("Błąd pobierania danych pogodowych dla higrometru:", error);
-                    }
-                }
-
-                generateHygrometerScale();
-                fetchHygrometerData();
-                setInterval(fetchHygrometerData, REFRESH_INTERVAL_MS);
-            });
-        </script>
       </div>
     </div>
   </div>
@@ -904,6 +755,7 @@
   </footer>
 
   <script>
+    // Offcanvas menu script
     const toggle = document.getElementById('menu-toggle');
     const menu   = document.getElementById('offcanvas-menu');
     const overlay= document.getElementById('menu-overlay');
@@ -916,6 +768,206 @@
       menu.classList.remove('open');
       overlay.classList.remove('open');
       document.body.style.overflow = 'auto';
+    });
+
+    // Thermometer functions
+    const thermometerNeedle = document.querySelector('.thermometer-needle');
+    const thermometerScaleContainer = document.querySelector('.thermometer-scale');
+
+    const minTemp = -40;
+    const maxTemp = 40;
+    const tempRange = maxTemp - minTemp;
+
+    const startAngle = -135;
+    const endAngle = 135;
+    const angleRange = endAngle - startAngle;
+
+    const OPENWEATHER_API_KEY = '4299e86ce701ae41b9de28f84e96002c';
+    const CITY_NAME = 'Gdansk';
+    const UNITS = 'metric';
+    const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+
+    function updateThermometer(temperature) {
+        temperature = Math.max(minTemp, Math.min(maxTemp, temperature));
+        const normalizedTemp = (temperature - minTemp) / tempRange;
+        const rotationAngle = startAngle + (normalizedTemp * angleRange);
+        thermometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
+    }
+
+    function generateThermometerScale() {
+        for (let temp = minTemp; temp <= maxTemp; temp += 10) {
+            const normalizedTemp = (temp - minTemp) / tempRange;
+            const angle = startAngle + (normalizedTemp * angleRange);
+
+            const markLabelDiv = document.createElement('div');
+            markLabelDiv.classList.add('mark-label');
+            markLabelDiv.style.transform = `rotate(${angle}deg)`;
+
+            const labelSpan = document.createElement('span');
+            labelSpan.textContent = temp;
+
+            let verticalAdjust = '';
+            if (temp < 0) {
+                verticalAdjust = 'translateY(-1.5px)';
+            }
+
+            labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg) ${verticalAdjust}`;
+
+            markLabelDiv.appendChild(labelSpan);
+            thermometerScaleContainer.appendChild(markLabelDiv);
+        }
+    }
+
+    async function fetchThermometerData() {
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=${UNITS}&appid=${OPENWEATHER_API_KEY}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("Dane pogodowe (termometr):", data);
+
+            const currentTemperature = data.main.temp;
+            updateThermometer(currentTemperature);
+        } catch (error) {
+            console.error("Błąd pobierania danych pogodowych dla termometru:", error);
+        }
+    }
+
+    // Barometer functions
+    const barometerNeedle = document.querySelector('.barometer-needle');
+    const barometerScaleContainer = document.querySelector('.barometer-scale');
+
+    const minPressure = 950;
+    const maxPressure = 1050;
+    const pressureRange = maxPressure - minPressure;
+
+    const barometerStartAngle = -135;
+    const barometerEndAngle = 135;
+    const barometerAngleRange = barometerEndAngle - barometerStartAngle;
+
+    function updateBarometer(pressure) {
+        pressure = Math.max(minPressure, Math.min(maxPressure, pressure));
+        const normalizedPressure = (pressure - minPressure) / pressureRange;
+        const rotationAngle = barometerStartAngle + (normalizedPressure * barometerAngleRange);
+        barometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
+    }
+
+    function generateBarometerScale() {
+        for (let pressure = minPressure; pressure <= maxPressure; pressure += 5) {
+            const normalizedPressure = (pressure - minPressure) / pressureRange;
+            const angle = barometerStartAngle + (normalizedPressure * barometerAngleRange);
+
+            if (pressure % 25 === 0) {
+                const markLabelDiv = document.createElement('div');
+                markLabelDiv.classList.add('mark-label');
+                markLabelDiv.style.transform = `rotate(${angle}deg)`;
+
+                const labelSpan = document.createElement('span');
+                labelSpan.textContent = pressure;
+                labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg)`;
+
+                markLabelDiv.appendChild(labelSpan);
+                barometerScaleContainer.appendChild(markLabelDiv);
+            } else {
+                const minorTickDiv = document.createElement('div');
+                minorTickDiv.classList.add('minor-tick');
+                minorTickDiv.style.transform = `rotate(${angle}deg)`;
+
+                const lineSpan = document.createElement('div');
+                lineSpan.classList.add('line');
+                minorTickDiv.appendChild(lineSpan);
+                barometerScaleContainer.appendChild(minorTickDiv);
+            }
+        }
+    }
+
+    async function fetchBarometerData() {
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=${UNITS}&appid=${OPENWEATHER_API_KEY}`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("Dane pogodowe (barometr):", data);
+            const currentPressure = data.main.pressure;
+            updateBarometer(currentPressure);
+        } catch (error) {
+            console.error("Błąd pobierania danych pogodowych dla barometru:", error);
+        }
+    }
+
+    // Hygrometer functions
+    const hygrometerNeedle = document.querySelector('.hygrometer-needle');
+    const hygrometerScaleContainer = document.querySelector('.hygrometer-scale');
+
+    const minHumidity = 0;
+    const maxHumidity = 100;
+    const humidityRange = maxHumidity - minHumidity;
+
+    const hygrometerStartAngle = barometerStartAngle;
+    const normalized1040hPa = (1040 - minPressure) / pressureRange; // Re-using barometer's minPressure and pressureRange
+    const hygrometerEndAngle = barometerStartAngle + (normalized1040hPa * barometerAngleRange);
+
+    const hygrometerAngleRange = hygrometerEndAngle - hygrometerStartAngle;
+
+    function updateHygrometer(humidity) {
+        humidity = Math.max(minHumidity, Math.min(maxHumidity, humidity));
+        const normalizedHumidity = (humidity - minHumidity) / humidityRange;
+        const rotationAngle = hygrometerStartAngle + (normalizedHumidity * hygrometerAngleRange);
+        hygrometerNeedle.style.transform = `translateX(-50%) rotate(${rotationAngle}deg)`;
+    }
+
+    function generateHygrometerScale() {
+        for (let hum = minHumidity; hum <= maxHumidity; hum += 10) {
+            const normalizedHum = (hum - minHumidity) / humidityRange;
+            const angle = hygrometerStartAngle + (normalizedHum * hygrometerAngleRange);
+
+            const markLabelDiv = document.createElement('div');
+            markLabelDiv.classList.add('mark-label');
+            markLabelDiv.style.transform = `rotate(${angle}deg)`;
+
+            const labelSpan = document.createElement('span');
+            labelSpan.textContent = hum;
+            labelSpan.style.transform = `translateX(-50%) rotate(${-angle}deg)`;
+
+            markLabelDiv.appendChild(labelSpan);
+            hygrometerScaleContainer.appendChild(markLabelDiv);
+        }
+    }
+
+    async function fetchHygrometerData() {
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${OPENWEATHER_API_KEY}`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("Dane pogodowe (higrometr):", data);
+            const currentHumidity = data.main.humidity;
+            updateHygrometer(currentHumidity);
+        } catch (error) {
+            console.error("Błąd pobierania danych pogodowych dla higrometru:", error);
+        }
+    }
+
+    // Initial calls on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+        generateThermometerScale();
+        fetchThermometerData();
+        setInterval(fetchThermometerData, REFRESH_INTERVAL_MS);
+
+        generateBarometerScale();
+        fetchBarometerData();
+        setInterval(fetchBarometerData, REFRESH_INTERVAL_MS);
+
+        generateHygrometerScale();
+        fetchHygrometerData();
+        setInterval(fetchHygrometerData, REFRESH_INTERVAL_MS);
     });
   </script>
 </body>
