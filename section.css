@@ -1,0 +1,288 @@
+/* section.css */
+
+/* Styles specific to subpage.html */
+
+/* Header link styling */
+.header-link {
+    text-decoration: none; /* Remove underline from the header link */
+    color: inherit; /* Inherit color from parent (h1) */
+    display: flex; /* Allow flex properties for alignment if needed */
+    align-items: center; /* Vertically align content within the link */
+    justify-content: center; /* Horizontally center content within the link */
+    width: 100%; /* Take full width of its parent */
+    height: 100%; /* Take full height of its parent */
+}
+
+/* Article content specific styles */
+.article-top-ad {
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.article-title {
+    font-size: 2.5em; /* Larger font for main article title */
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif; /* Consistent with header title */
+    color: #000;
+}
+
+.lead {
+    font-size: 1.2em; /* Slightly larger for lead paragraph */
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-family: 'Merriweather', serif; /* Example font for article body */
+}
+
+.author-date {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.article-main-image {
+    width: 100%; /* Full width within its container */
+    height: auto;
+    display: block; /* Remove extra space below image */
+    margin-bottom: 10px;
+}
+
+.image-caption {
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: left;
+    color: #666;
+    margin-bottom: 30px; /* Space below caption, before main body */
+}
+
+.article-body p {
+    margin-bottom: 1em; /* Spacing between paragraphs */
+    line-height: 1.6;
+    font-family: 'Merriweather', serif; /* Example font for article body */
+    font-size: 1em;
+}
+
+/* Article actions (below article) */
+.article-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Simple separator */
+    text-align: center;
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Space between items */
+}
+
+.article-actions p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+.article-actions a {
+    text-decoration: none;
+    color: #000; /* Dark text, no blue */
+    font-weight: bold;
+    display: inline-block; /* Allows margin/padding */
+    padding: 5px 10px;
+    /* Removed border */
+    border-radius: 5px;
+    /* Removed margin, using gap on parent instead */
+}
+
+.article-actions a:hover {
+    background-color: #eee; /* Subtle hover effect */
+    color: #000;
+}
+
+/* Sidebar specific styles */
+.kontener-szary {
+    background-color: #eee; /* Gray background for sidebar */
+    padding: 20px;
+}
+
+.support-newsletter-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between buttons */
+}
+
+.support-newsletter-section button,
+.support-newsletter-section a {
+    display: block; /* Make buttons/links take full width */
+    padding: 10px 15px;
+    background-color: #bbb;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.support-newsletter-section button:hover,
+.support-newsletter-section a:hover {
+    background-color: #999;
+}
+
+/* Ad block in sidebar */
+.sidebar-bottom-ad {
+    margin-top: 30px;
+    text-align: center;
+    background: #f3f3f3; /* Consistent with article-top-ad */
+    border: 1px solid #ccc; /* Consistent with article-top-ad */
+    padding: 16px; /* Consistent with article-top-ad */
+}
+
+/* Weather Widget Styles */
+.weather-widget-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px; /* Space below clock/calendar */
+    margin-bottom: 20px; /* Space above support buttons */
+    border-radius: 8px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.weather-widget-container h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.weather-input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.weather-input-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+    width: 120px;
+}
+
+.weather-input-group button {
+    padding: 8px 12px;
+    background-color: #a0a0a0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.weather-input-group button:hover {
+    background-color: #888;
+}
+
+.weather-info p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #444;
+}
+
+#weather-temp {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #000;
+}
+
+#weather-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    display: block;
+}
+
+.weather-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+
+/* Mobile layout adjustments for sidebar elements */
+@media (max-width: 768px) {
+    /* Hide desktop sidebar elements on mobile portrait */
+    .desktop-sidebar {
+        display: none !important; /* Hide the entire desktop sidebar */
+    }
+
+    /* Ensure mobile-top-gadgets-container (clock/calendar) is displayed as row */
+    .mobile-top-gadgets-container {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        background: none;
+    }
+
+    .mobile-top-gadgets-container iframe {
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    .mobile-top-gadgets-container iframe.calendar-iframe {
+        margin-right: 0;
+    }
+
+    /* Show mobile-bottom-gadgets-container and its contents */
+    .mobile-bottom-gadgets-container {
+        display: flex !important;
+        flex-direction: column; /* Stacked vertically */
+        align-items: center;
+        width: 100%;
+        padding: 10px 20px; /* Add padding for mobile */
+        box-sizing: border-box; /* Include padding in width */
+        background: #f5f5f5; /* Light background for bottom section */
+        margin-top: 20px; /* Space from main content */
+    }
+
+    .mobile-bottom-gadgets-container .support-newsletter-section,
+    .mobile-bottom-gadgets-container .ads,
+    .mobile-bottom-gadgets-container .weather-widget-container { /* Include weather widget for mobile bottom */
+        width: 100%; /* Take full width within container */
+        margin-bottom: 15px; /* Spacing between blocks */
+    }
+
+    .mobile-bottom-gadgets-container .support-newsletter-section {
+        padding: 15px;
+        background-color: #e0e0e0;
+        border-radius: 8px;
+    }
+
+    .mobile-bottom-gadgets-container .ads {
+        padding: 15px;
+        background-color: #d0d0d0;
+        border-radius: 8px;
+    }
+
+    .mobile-bottom-gadgets-container .weather-widget-container {
+        margin-top: 0; /* Remove top margin when moved to bottom */
+        margin-bottom: 15px; /* Consistent spacing */
+    }
+}
+
+/* Landscape mobile (wider than 768px but less than desktop breakpoint) will use desktop sidebar layout */
+@media (min-width: 769px) {
+    .mobile-top-gadgets-container,
+    .mobile-bottom-gadgets-container {
+        display: none !important; /* Hide mobile containers on desktop/landscape tablet */
+    }
+    .desktop-sidebar {
+        display: flex !important; /* Ensure desktop sidebar is visible */
+    }
+}
