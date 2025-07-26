@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Railway Clock</title>
+    <style>
+        /* Globalne style dla body, aby zegar był wyśrodkowany i wypełniał iframe */
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Wypełnia wysokość iframe */
+            width: 100vw;  /* Wypełnia szerokość iframe */
+            background: transparent; /* Upewnia się, że tło iframe jest przezroczyste */
+        }
+
+        /* Główny kontener zegara - obudowa (koperta) */
+        .clock-outer-casing {
+            width: 90%; /* Zajmuje 90% szerokości dostępnej w iframe */
+            height: 90%; /* Zajmuje 90% wysokości dostępnej w iframe */
+            max-width: 200px; /* Maksymalny rozmiar obudowy */
+            max-height: 200px; /* Maksymalny rozmiar obudowy */
+            min-width: 100px; /* Minimalny rozmiar obudowy */
+            min-height: 100px; /* Minimalny rozmiar obudowy */
+            border-radius: 50%; /* Okrągły kształt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Dla pozycjonowania wewnętrznych elementów */
+            box-sizing: border-box; /* Zapewnia, że padding i border są wliczone w szerokość/wysokość */
+
+            /* Style metalicznej obudowy */
+            background: linear-gradient(to bottom right, #e0e0e0, #f8f8f8, #e0e0e0); /* Jasny metaliczny gradient */
+            box-shadow:
+                0 0 0 2% #c0c0c0, /* Zewnętrzny pierścień (bezel) */
+                0 0 0 4% #a0a0a0, /* Ciemniejszy pierścień dla głębi */
+                0 0 15px rgba(0, 0, 0, 0.4), /* Ogólny cień dla głębi */
+                inset 0 0 10px rgba(255, 255, 255, 0.8); /* Wewnętrzne podświetlenie */
+        }
+
+        /* Właściwa tarcza zegara (wewnątrz metalicznej obudowy) */
+        .clock.station {
+            width: 88%; /* Zajmuje 88% szerokości obudowy */
+            height: 88%; /* Zajmuje 88% wysokości obudowy */
+            border-radius: 50%;
+            /* Przywrócono odwołanie do zewnętrznego pliku SVG */
+            background: #fff url('images/station_clock.svg') no-repeat center;
+            background-size: 95%; /* Dostosowanie rozmiaru SVG tarczy */
+            box-shadow: 0 0 1em rgba(0, 0, 0, 0.2) inset; /* Wewnętrzny cień dla głębi tarczy */
+            position: relative; /* Dla pozycjonowania wskazówek */
+        }
+
+        /* Centralna kropka na tarczy zegara - oryginalnie używana, ale teraz zastąpiona przez czerwoną kropkę na sekundniku */
+        .clock::after {
+            display: none; /* Ukrywamy, aby nie kolidowała z czerwoną kropką sekundnika */
+        }
+
+        /* Kontenery wskazówek */
+        .minutes-container, .hours-container, .seconds-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0; /* Domyślnie niewidoczne, staną się widoczne po inicjalizacji JS */
+        }
+
+        /* Wskazówka sekundowa - pogrubiona 3x */
+        .seconds {
+            background: red;
+            width: 3.75%; /* Zwiększono szerokość 3x (z 1.25% na 3.75%) */
+            height: 42%;  /* Względna wysokość do tarczy zegara */
+            position: absolute;
+            left: 48.125%; /* Dostosowano położenie, aby wskazówka była wyśrodkowana */
+            top: 20%; /* Pozycjonowanie, aby punkt obrotu był w centrum */
+            transform-origin: 50% 71%; /* Punkt obrotu na środku tarczy */
+            z-index: 8;
+        }
+
+        /* Czerwony dysk na końcu wskazówki sekundowej (przy punkcie obrotu) - rozmiar bez zmian */
+        .clock.station .seconds::before {
+            background: red;
+            border-radius: 100%;
+            content: "";
+            position: absolute;
+            top: -15%; /* Pozycja względem elementu .seconds */
+            left: -83.335%; /* Dostosowano położenie, aby krążek pozostał wyśrodkowany na punkcie obrotu */
+            height: 23.98765%; /* Oryginalna wysokość */
+            width: 266.67%; /* Dostosowano szerokość procentową, aby zachować oryginalny rozmiar absolutny */
+        }
+
+        /* Wskazówka minutowa */
+        .minutes {
+            background: #000;
+            width: 4.2%;
+            height: 53%; /* Długość dostosowana zgodnie z poprzednią prośbą */
+            position: absolute;
+            left: 48.1%;
+            top: 8.5%; /* Pozycja dostosowana, aby punkt obrotu był spójny */
+            transform-origin: 50% 78.5%;
+        }
+
+        /* Wskazówka godzinowa */
+        .hours {
+            background: #000;
+            width: 3.5%;
+            height: 40%;
+            position: absolute;
+            left: 48.25%;
+            top: 22%;
+            transform-origin: 50% 71%;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-outer-casing">
+        <div class="clock station">
+            <div class="minutes-container">
+                <div class="minutes"></div>
+            </div>
+            <div class="hours-container">
+                <div class="hours"></div>
+            </div>
+            <div class="seconds-container">
+                <div class="seconds"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Stałe czasowe i kątowe
+        const timeAroundClock = 58500; // Czas obrotu wskazówki sekundowej w milisekach (prawie minuta)
+        const degreePerMinute = 360 / 60; // Stopnie na minutę (dla wskazówki minutowej)
+        const degreePerHour = 360 / 12;   // Stopnie na godzinę (dla wskazówki godzinowej)
+        const degreePerHourInMinutes = degreePerHour / 60; // Stopnie na minutę dla wskazówki godzinowej
+
+        // Uruchomienie funkcji firstMinute po załadowaniu DOM
+        window.addEventListener('DOMContentLoaded', () => {
+            firstMinute();
+        });
+
+        // Obsługa zmiany widoczności dokumentu (np. przełączanie kart)
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                // Jeśli karta jest ukryta, zatrzymaj animacje
+                let animations = document.getAnimations();
+                if (animations.length > 0) {
+                    animations.forEach(animation => {
+                        animation.finish(); // Zakończ animację
+                    });
+                }
+            } else {
+                // Jeśli karta jest ponownie widoczna, zrestartuj zegar
+                firstMinute();
+            }
+        });
+
+        // Funkcja inicjalizująca zegar dla pierwszej minuty
+        function firstMinute() {
+            const dateNow = new Date();
+            // Oblicz upłynięty czas w bieżącej minucie (sekundy + milisekundy)
+            const elapsed = dateNow.getSeconds() * 1000 + dateNow.getMilliseconds();
+
+            // Ustaw początkową pozycję wskazówki godzinowej
+            hour(dateNow.getHours(), dateNow.getMinutes());
+            // Ustaw początkową pozycję wskazówki minutowej
+            setMinute(dateNow.getMinutes());
+
+            // Jeśli upłynął cały cykl (prawie minuta), zakończ animację minuty
+            if (elapsed >= timeAroundClock) {
+                finishedMinuteAnimation();
+            } else {
+                // W przeciwnym razie rozpocznij animację sekundową
+                second(elapsed / timeAroundClock, (timeAroundClock - elapsed) / timeAroundClock);
+            }
+        }
+
+        // Funkcja wywoływana po zakończeniu animacji minuty
+        async function finishedMinuteAnimation() {
+            const initialHour = new Date().getHours();
+            const initialMinute = new Date().getMinutes();
+            // Poczekaj na początek następnej minuty
+            let newMinute = await nextMinute();
+            if (newMinute === 0) {
+                newMinute = 60; // Jeśli nowa minuta to 0 (pełna godzina), ustaw na 60 dla animacji
+            }
+            // Zrestartuj animację sekundową
+            second();
+            // Animuj przejście wskazówki minutowej
+            minute(initialMinute, newMinute);
+            // Zaktualizuj wskazówkę godzinową
+            hour(initialHour, newMinute);
+        }
+
+        // Funkcja zwracająca Promise, który rozwiązuje się na początku następnej minuty
+        function nextMinute() {
+            return new Promise(resolve => {
+                const now = new Date();
+                // Oblicz pozostałe milisekundy do początku następnej minuty
+                const remainingMilliseconds = ((60 - now.getSeconds()) * 1000) + (1000 - now.getMilliseconds());
+                setTimeout(() => {
+                    resolve(new Date().getMinutes());
+                }, remainingMilliseconds);
+            });
+        }
+
+        // Funkcja ustawiająca pozycję wskazówki godzinowej
+        function hour(hour, minute) {
+            // Oblicz kąt obrotu dla wskazówki godzinowej
+            const hourInDegree = (hour % 12) * degreePerHour;
+            const hourElement = document.querySelector('.hours-container');
+            hourElement.style.transform = 'rotate(' + (hourInDegree + (minute * degreePerHourInMinutes)) + 'deg)';
+            hourElement.style.opacity = 1; // Upewnij się, że wskazówka jest widoczna
+        }
+
+        // Funkcja ustawiająca początkową pozycję wskazówki minutowej
+        function setMinute(value) {
+            const minuteElement = document.querySelector('.minutes-container');
+            minuteElement.style.transform = 'rotate(' + (value * degreePerMinute) + 'deg)';
+            minuteElement.style.opacity = 1; // Upewnij się, że wskazówka jest widoczna
+        }
+
+        // Funkcja animująca przejście wskazówki minutowej
+        function minute(initialMinute, newMinute) {
+            const minuteElement = document.querySelector('.minutes-container');
+            if (newMinute === 60) {
+                // Specjalna animacja dla przejścia z 59 na 0 (pełna godzina)
+                let animation = minuteElement.animate([
+                    {transform: 'rotate(' + initialMinute * degreePerMinute + 'deg)'},
+                    {transform: 'rotate(' + newMinute * degreePerMinute + 'deg)'}
+                ], {duration: 300, iterations: 1, easing: 'cubic-bezier(1, 2.52, 0.71, 0.6)', fill: 'forwards'});
+                animation.finished.then(() => {
+                    minuteElement.style.transform = 'rotate(0deg)'; // Zresetuj do 0 po animacji
+                });
+                animation.play();
+            } else {
+                // Standardowa animacja dla przejścia minuty
+                let animation = minuteElement.animate([
+                    {transform: 'rotate(' + initialMinute * degreePerMinute + 'deg)'},
+                    {transform: 'rotate(' + newMinute * degreePerMinute + 'deg)'}
+                ], {duration: 300, iterations: 1, easing: 'cubic-bezier(1, 2.52, 0.71, 0.6)', fill: 'both'}).play();
+            }
+        }
+
+        // Funkcja animująca wskazówkę sekundową
+        function second(start = 0, iterations = 1) {
+            const secondsElement = document.querySelector('.seconds-container');
+            let animation = secondsElement.animate([
+                {transform: 'rotate(0)', easing: 'cubic-bezier(0.2, 0, 1, 1)'},
+                {transform: 'rotate(0.25turn)', easing: 'cubic-bezier(0.11, 0.12, 0.85, 0.86)', offset: 0.25},
+                {transform: 'rotate(0.95turn)', easing: 'cubic-bezier(1, 1.36, 0.88, 0.88)', offset: 0.95},
+                {transform: 'rotate(1turn)'}
+            ], {
+                duration: timeAroundClock, // Czas trwania animacji (prawie minuta)
+                fill: 'none',
+                iterationStart: start,     // Punkt początkowy animacji (dla pierwszej minuty)
+                iterations: iterations     // Liczba powtórzeń (1 dla pierwszej minuty, nieskończoność później)
+            });
+            animation.finished.then(() => {
+                finishedMinuteAnimation(); // Po zakończeniu animacji sekundowej, przejdź do następnej minuty
+            });
+            animation.play();
+            secondsElement.style.opacity = 1; // Upewnij się, że wskazówka jest widoczna
+        }
+    </script>
+</body>
+</html>
