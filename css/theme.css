@@ -51,6 +51,12 @@ header h1 img {
     vertical-align: middle;
 }
 
+/* Styling for the header link */
+.header-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 nav.main-nav {
   display: flex;
   padding: 10px 20px; /* Dodano poziomy padding dla paska przewijania */
@@ -249,7 +255,7 @@ nav.main-nav ul li a {
   float: left;
   width: 60%;
   word-break: normal;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Merriweather', serif;
   font-variant: normal;
   text-transform: none;
   font-size: 18px;

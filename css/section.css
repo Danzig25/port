@@ -87,9 +87,7 @@
     font-weight: bold;
     display: inline-block; /* Allows margin/padding */
     padding: 5px 10px;
-    /* Removed border */
     border-radius: 5px;
-    /* Removed margin, using gap on parent instead */
 }
 
 .article-actions a:hover {
@@ -101,6 +99,9 @@
 .kontener-szary {
     background-color: #eee; /* Gray background for sidebar */
     padding: 20px;
+    display: flex; /* Use flexbox for vertical centering */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
 }
 
 .support-newsletter-section {
@@ -144,42 +145,56 @@
 .weather-widget-container {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 10px; /* Reduced padding */
     margin-top: 20px; /* Space below clock/calendar */
     margin-bottom: 20px; /* Space above support buttons */
     border-radius: 8px;
     text-align: center;
     font-family: Arial, sans-serif;
+    width: 150px; /* Fixed width */
+    max-width: 150px; /* Fixed max-width */
+    box-sizing: border-box; /* Include padding in width */
+    /* Adjusting margins to align with clock/calendar iframes */
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 14px; /* Reduced font size for widget contents */
 }
 
 .weather-widget-container h3 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced margin */
     color: #333;
-    font-size: 1.2em;
+    font-size: 1.1em; /* Adjusted font size */
 }
 
 .weather-input-group {
     display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+    flex-direction: column; /* Stack input and button vertically */
+    align-items: center; /* Center items */
+    margin-bottom: 10px; /* Reduced margin */
+    gap: 5px; /* Space between input and button */
 }
 
 .weather-input-group input {
-    padding: 8px;
+    padding: 6px; /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 5px;
-    width: 120px;
+    width: calc(100% - 12px); /* Adjust width to fit 150px with padding */
+    margin-right: 0; /* Remove horizontal margin */
+    box-sizing: border-box;
+    font-size: 0.9em; /* Smaller font for input */
 }
 
 .weather-input-group button {
-    padding: 8px 12px;
+    padding: 6px 10px; /* Reduced padding */
     background-color: #a0a0a0;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: calc(100% - 12px); /* Adjust width to fit 150px with padding */
+    box-sizing: border-box;
+    font-size: 0.9em; /* Smaller font for button */
 }
 
 .weather-input-group button:hover {
@@ -187,28 +202,76 @@
 }
 
 .weather-info p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #444;
+    margin: 4px 0; /* Reduced margin */
+    font-size: 0.95em; /* Adjusted font size */
+    color: #444; /* Default text color */
 }
 
-#weather-temp {
-    font-size: 1.8em;
+#weather-city {
+    font-size: 1.1em; /* Adjusted city font size */
     font-weight: bold;
     color: #000;
+    margin-bottom: 8px; /* Reduced margin */
 }
 
+/* Specific colors for weather data values */
+.weather-detail span { /* Apply color to the span holding the value */
+    font-weight: bold;
+}
+
+#weather-temp, #weather-temp-mobile { /* Apply color directly to the span id */
+    color: red;
+}
+#weather-humidity, #weather-humidity-mobile { /* Apply color directly to the span id */
+    color: green;
+}
+#weather-wind, #weather-wind-mobile { /* Apply color directly to the span id */
+    color: darkgoldenrod; /* Dark yellow */
+}
+#weather-pressure, #weather-pressure-mobile { /* Apply color directly to the span id */
+    color: blue; /* Changed to navy as per instruction */
+}
+
+
+/* Precipitation status colors */
+.no-rain {
+    color: green; /* Changed from lightgray to green as per instruction */
+    font-weight: bold; /* Added bold as per instruction */
+}
+.rain {
+    color: blue;
+    font-weight: bold;
+}
+.heavy-rain {
+    color: red;
+    font-weight: bold;
+}
+
+
 #weather-icon {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto;
+    width: 40px; /* Smaller icon */
+    height: 40px; /* Smaller icon */
+    margin: 5px auto; /* Adjusted margin */
     display: block;
 }
 
 .weather-error {
     color: red;
-    font-size: 0.9em;
-    margin-top: 10px;
+    font-size: 0.85em; /* Smaller font for error */
+    margin-top: 8px; /* Reduced margin */
+}
+
+.weather-link {
+    display: block;
+    margin-top: 12px; /* Adjusted margin */
+    font-size: 0.85em; /* Smaller font for link */
+    color: #555; /* Small and clean, not visually dominant */
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.weather-link:hover {
+    text-decoration: underline;
 }
 
 
@@ -255,7 +318,10 @@
     .mobile-bottom-gadgets-container .ads,
     .mobile-bottom-gadgets-container .weather-widget-container { /* Include weather widget for mobile bottom */
         width: 100%; /* Take full width within container */
+        max-width: none; /* Remove fixed max-width for mobile */
         margin-bottom: 15px; /* Spacing between blocks */
+        margin-left: 0; /* Remove specific left/right margins for mobile full width */
+        margin-right: 0;
     }
 
     .mobile-bottom-gadgets-container .support-newsletter-section {
@@ -273,6 +339,12 @@
     .mobile-bottom-gadgets-container .weather-widget-container {
         margin-top: 0; /* Remove top margin when moved to bottom */
         margin-bottom: 15px; /* Consistent spacing */
+    }
+
+    /* Adjust weather widget elements for mobile full width */
+    .mobile-bottom-gadgets-container .weather-input-group input,
+    .mobile-bottom-gadgets-container .weather-input-group button {
+        width: 80%; /* Adjust width for mobile input/button */
     }
 }
 
