@@ -37,7 +37,7 @@ header {
 }
 
 header h1 {
-  font-size: 1.6rem; /* Reduced font size for header title */
+  font-size: 20px;
   font-family: 'Libre Baskerville', serif; /* Updated from Playfair Display SC */
   color: #000;
   letter-spacing: 0.05em;
@@ -317,6 +317,20 @@ nav.main-nav ul li {
   padding: 20px;
   background: #eee;
   text-align: center;
+}
+
+/* New rules added as per user's request */
+.article-title {
+  font-family: 'Merriweather', serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.article-body p,
+.lead {
+  font-family: 'Merriweather', serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* --- Media queries dla responsywności (mobile) --- */
