@@ -1,16 +1,28 @@
 /* section.css */
-
 /* Styles specific to subpage.html */
-
 /* Header link styling */
 .header-link {
-    text-decoration: none; /* Remove underline from the header link */
-    color: inherit; /* Inherit color from parent (h1) */
-    display: flex; /* Allow flex properties for alignment if needed */
-    align-items: center; /* Vertically align content within the link */
-    justify-content: center; /* Horizontally center content within the link */
-    width: 100%; /* Take full width of its parent */
-    height: 100%; /* Take full height of its parent */
+    text-decoration: none;
+
+    /* Remove underline from the header link */
+    color: inherit;
+
+    /* Inherit color from parent (h1) */
+    display: flex;
+
+    /* Allow flex properties for alignment if needed */
+    align-items: center;
+
+    /* Vertically align content within the link */
+    justify-content: center;
+
+    /* Horizontally center content within the link */
+    width: 100%;
+
+    /* Take full width of its parent */
+    height: 100%;
+
+    /* Take full height of its parent */
 }
 
 /* Article content specific styles */
@@ -23,18 +35,26 @@
 }
 
 .article-title {
-    font-size: 2.5em; /* Larger font for main article title */
+    font-size: 2.5em;
+
+    /* Larger font for main article title */
     margin-bottom: 15px;
-    font-family: 'Playfair Display', serif; /* Consistent with header title */
+    font-family: 'Playfair Display', serif;
+
+    /* Consistent with header title */
     color: #000;
 }
 
 .lead {
-    font-size: 1.2em; /* Slightly larger for lead paragraph */
+    font-size: 1.2em;
+
+    /* Slightly larger for lead paragraph */
     font-weight: bold;
     margin-bottom: 20px;
     line-height: 1.4;
-    font-family: 'Merriweather', serif; /* Example font for article body */
+    font-family: 'Merriweather', serif;
+
+    /* Example font for article body */
 }
 
 .author-date {
@@ -44,9 +64,13 @@
 }
 
 .article-main-image {
-    width: 100%; /* Full width within its container */
+    width: 100%;
+
+    /* Full width within its container */
     height: auto;
-    display: block; /* Remove extra space below image */
+    display: block;
+
+    /* Remove extra space below image */
     margin-bottom: 10px;
 }
 
@@ -55,53 +79,85 @@
     font-style: italic;
     text-align: left;
     color: #666;
-    margin-bottom: 30px; /* Space below caption, before main body */
+    margin-bottom: 30px;
+
+    /* Space below caption, before main body */
 }
 
 .article-body p {
-    margin-bottom: 1em; /* Spacing between paragraphs */
+    margin-bottom: 1em;
+
+    /* Spacing between paragraphs */
     line-height: 1.6;
-    font-family: 'Merriweather', serif; /* Example font for article body */
-    font-size: 1em;
+    font-family: 'Merriweather', serif;
+
+    /* Example font for article body */
+    font-size: 16px;
 }
 
 /* Article actions (below article) */
 .article-actions {
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid #eee; /* Simple separator */
+    border-top: 1px solid #eee;
+
+    /* Simple separator */
     text-align: center;
-    display: flex; /* Use flexbox for horizontal layout */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: center; /* Center items horizontally */
-    gap: 10px; /* Space between items */
+    display: flex;
+
+    /* Use flexbox for horizontal layout */
+    flex-wrap: wrap;
+
+    /* Allow wrapping on smaller screens */
+    justify-content: center;
+
+    /* Center items horizontally */
+    gap: 10px;
+
+    /* Space between items */
 }
 
 .article-actions p {
-    margin: 0; /* Remove default paragraph margin */
+    margin: 0;
+
+    /* Remove default paragraph margin */
 }
 
 .article-actions a {
     text-decoration: none;
-    color: #000; /* Dark text, no blue */
+    color: #000;
+
+    /* Dark text, no blue */
     font-weight: bold;
-    display: inline-block; /* Allows margin/padding */
+    display: inline-block;
+
+    /* Allows margin/padding */
     padding: 5px 10px;
     border-radius: 5px;
 }
 
 .article-actions a:hover {
-    background-color: #eee; /* Subtle hover effect */
+    background-color: #eee;
+
+    /* Subtle hover effect */
     color: #000;
 }
 
 /* Sidebar specific styles */
 .kontener-szary {
-    background-color: #eee; /* Gray background for sidebar */
+    background-color: #eee;
+
+    /* Gray background for sidebar */
     padding: 20px;
-    display: flex; /* Use flexbox for vertical centering */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
+    display: flex;
+
+    /* Use flexbox for vertical centering */
+    flex-direction: column;
+
+    /* Stack items vertically */
+    align-items: center;
+
+    /* Center items horizontally */
 }
 
 .support-newsletter-section {
@@ -110,12 +166,16 @@
     border-top: 1px solid #ccc;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between buttons */
+    gap: 10px;
+
+    /* Space between buttons */
 }
 
 .support-newsletter-section button,
-.support-newsletter-section a {
-    display: block; /* Make buttons/links take full width */
+.support-newsletter-section a {
+    display: block;
+
+    /* Make buttons/links take full width */
     padding: 10px 15px;
     background-color: #bbb;
     color: #000;
@@ -128,7 +188,7 @@
 }
 
 .support-newsletter-section button:hover,
-.support-newsletter-section a:hover {
+.support-newsletter-section a:hover {
     background-color: #999;
 }
 
@@ -136,65 +196,111 @@
 .sidebar-bottom-ad {
     margin-top: 30px;
     text-align: center;
-    background: #f3f3f3; /* Consistent with article-top-ad */
-    border: 1px solid #ccc; /* Consistent with article-top-ad */
-    padding: 16px; /* Consistent with article-top-ad */
+    background: #f3f3f3;
+
+    /* Consistent with article-top-ad */
+    border: 1px solid #ccc;
+
+    /* Consistent with article-top-ad */
+    padding: 16px;
+
+    /* Consistent with article-top-ad */
 }
 
 /* Weather Widget Styles */
 .weather-widget-container {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    padding: 10px; /* Reduced padding */
-    margin-top: 20px; /* Space below clock/calendar */
-    margin-bottom: 20px; /* Space above support buttons */
+    padding: 10px;
+
+    /* Reduced padding */
+    margin-top: 20px;
+
+    /* Space below clock/calendar */
+    margin-bottom: 20px;
+
+    /* Space above support buttons */
     border-radius: 8px;
     text-align: center;
     font-family: Arial, sans-serif;
-    width: 150px; /* Fixed width */
-    max-width: 150px; /* Fixed max-width */
-    box-sizing: border-box; /* Include padding in width */
+    width: 150px;
+
+    /* Fixed width */
+    max-width: 150px;
+
+    /* Fixed max-width */
+    box-sizing: border-box;
+
+    /* Include padding in width */
     /* Adjusting margins to align with clock/calendar iframes */
     margin-left: 4px;
     margin-right: 4px;
-    font-size: 14px; /* Reduced font size for widget contents */
+    font-size: 14px;
+
+    /* Reduced font size for widget contents */
 }
 
 .weather-widget-container h3 {
     margin-top: 0;
-    margin-bottom: 8px; /* Reduced margin */
+    margin-bottom: 8px;
+
+    /* Reduced margin */
     color: #333;
-    font-size: 1.1em; /* Adjusted font size */
+    font-size: 1.1em;
+
+    /* Adjusted font size */
 }
 
 .weather-input-group {
     display: flex;
-    flex-direction: column; /* Stack input and button vertically */
-    align-items: center; /* Center items */
-    margin-bottom: 10px; /* Reduced margin */
-    gap: 5px; /* Space between input and button */
+    flex-direction: column;
+
+    /* Stack input and button vertically */
+    align-items: center;
+
+    /* Center items */
+    margin-bottom: 10px;
+
+    /* Reduced margin */
+    gap: 5px;
+
+    /* Space between input and button */
 }
 
 .weather-input-group input {
-    padding: 6px; /* Reduced padding */
+    padding: 6px;
+
+    /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: calc(100% - 12px); /* Adjust width to fit 150px with padding */
-    margin-right: 0; /* Remove horizontal margin */
+    width: calc(100% - 12px);
+
+    /* Adjust width to fit 150px with padding */
+    margin-right: 0;
+
+    /* Remove horizontal margin */
     box-sizing: border-box;
-    font-size: 0.9em; /* Smaller font for input */
+    font-size: 0.9em;
+
+    /* Smaller font for input */
 }
 
 .weather-input-group button {
-    padding: 6px 10px; /* Reduced padding */
+    padding: 6px 10px;
+
+    /* Reduced padding */
     background-color: #a0a0a0;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: calc(100% - 12px); /* Adjust width to fit 150px with padding */
+    width: calc(100% - 12px);
+
+    /* Adjust width to fit 150px with padding */
     box-sizing: border-box;
-    font-size: 0.9em; /* Smaller font for button */
+    font-size: 0.9em;
+
+    /* Smaller font for button */
 }
 
 .weather-input-group button:hover {
@@ -202,70 +308,116 @@
 }
 
 .weather-info p {
-    margin: 4px 0; /* Reduced margin */
-    font-size: 0.95em; /* Adjusted font size */
-    color: #444; /* Default text color */
+    margin: 4px 0;
+
+    /* Reduced margin */
+    font-size: 0.95em;
+
+    /* Adjusted font size */
+    color: #444;
+
+    /* Default text color */
 }
 
 #weather-city {
-    font-size: 1.1em; /* Adjusted city font size */
+    font-size: 1.1em;
+
+    /* Adjusted city font size */
     font-weight: bold;
     color: #000;
-    margin-bottom: 8px; /* Reduced margin */
+    margin-bottom: 8px;
+
+    /* Reduced margin */
 }
 
 /* Specific colors for weather data values */
-.weather-detail span { /* Apply color to the span holding the value */
+.weather-detail span {
+    /* Apply color to the span holding the value */
     font-weight: bold;
 }
 
-#weather-temp, #weather-temp-mobile { /* Apply color directly to the span id */
+#weather-temp,
+#weather-temp-mobile {
+    /* Apply color directly to the span id */
     color: red;
 }
-#weather-humidity, #weather-humidity-mobile { /* Apply color directly to the span id */
+
+#weather-humidity,
+#weather-humidity-mobile {
+    /* Apply color directly to the span id */
     color: green;
 }
-#weather-wind, #weather-wind-mobile { /* Apply color directly to the span id */
-    color: darkgoldenrod; /* Dark yellow */
-}
-#weather-pressure, #weather-pressure-mobile { /* Apply color directly to the span id */
-    color: blue; /* Changed to navy as per instruction */
+
+#weather-wind,
+#weather-wind-mobile {
+    /* Apply color directly to the span id */
+    color: darkgoldenrod;
+
+    /* Dark yellow */
 }
 
+#weather-pressure,
+#weather-pressure-mobile {
+    /* Apply color directly to the span id */
+    color: blue;
+
+    /* Changed to navy as per instruction */
+}
 
 /* Precipitation status colors */
 .no-rain {
-    color: green; /* Changed from lightgray to green as per instruction */
-    font-weight: bold; /* Added bold as per instruction */
+    color: green;
+
+    /* Changed from lightgray to green as per instruction */
+    font-weight: bold;
+
+    /* Added bold as per instruction */
 }
+
 .rain {
     color: blue;
     font-weight: bold;
 }
+
 .heavy-rain {
     color: red;
     font-weight: bold;
 }
 
-
 #weather-icon {
-    width: 40px; /* Smaller icon */
-    height: 40px; /* Smaller icon */
-    margin: 5px auto; /* Adjusted margin */
+    width: 40px;
+
+    /* Smaller icon */
+    height: 40px;
+
+    /* Smaller icon */
+    margin: 5px auto;
+
+    /* Adjusted margin */
     display: block;
 }
 
 .weather-error {
     color: red;
-    font-size: 0.85em; /* Smaller font for error */
-    margin-top: 8px; /* Reduced margin */
+    font-size: 0.85em;
+
+    /* Smaller font for error */
+    margin-top: 8px;
+
+    /* Reduced margin */
 }
 
 .weather-link {
     display: block;
-    margin-top: 12px; /* Adjusted margin */
-    font-size: 0.85em; /* Smaller font for link */
-    color: #555; /* Small and clean, not visually dominant */
+    margin-top: 12px;
+
+    /* Adjusted margin */
+    font-size: 0.85em;
+
+    /* Smaller font for link */
+    color: #555;
+
+    /* Small and clean, not visually dominant */
     text-decoration: none;
     font-weight: normal;
 }
@@ -274,12 +426,13 @@
     text-decoration: underline;
 }
 
-
 /* Mobile layout adjustments for sidebar elements */
 @media (max-width: 768px) {
     /* Hide desktop sidebar elements on mobile portrait */
     .desktop-sidebar {
-        display: none !important; /* Hide the entire desktop sidebar */
+        display: none !important;
+
+        /* Hide the entire desktop sidebar */
     }
 
     /* Ensure mobile-top-gadgets-container (clock/calendar) is displayed as row */
@@ -298,6 +451,7 @@
         margin-left: 0;
         margin-right: 10px;
     }
+
     .mobile-top-gadgets-container iframe.calendar-iframe {
         margin-right: 0;
     }
@@ -305,22 +459,41 @@
     /* Show mobile-bottom-gadgets-container and its contents */
     .mobile-bottom-gadgets-container {
         display: flex !important;
-        flex-direction: column; /* Stacked vertically */
+        flex-direction: column;
+
+        /* Stacked vertically */
         align-items: center;
         width: 100%;
-        padding: 10px 20px; /* Add padding for mobile */
-        box-sizing: border-box; /* Include padding in width */
-        background: #f5f5f5; /* Light background for bottom section */
-        margin-top: 20px; /* Space from main content */
+        padding: 10px 20px;
+
+        /* Add padding for mobile */
+        box-sizing: border-box;
+
+        /* Include padding in width */
+        background: #f5f5f5;
+
+        /* Light background for bottom section */
+        margin-top: 20px;
+
+        /* Space from main content */
     }
 
     .mobile-bottom-gadgets-container .support-newsletter-section,
-    .mobile-bottom-gadgets-container .ads,
-    .mobile-bottom-gadgets-container .weather-widget-container { /* Include weather widget for mobile bottom */
-        width: 100%; /* Take full width within container */
-        max-width: none; /* Remove fixed max-width for mobile */
-        margin-bottom: 15px; /* Spacing between blocks */
-        margin-left: 0; /* Remove specific left/right margins for mobile full width */
+        .mobile-bottom-gadgets-container .ads,
+        .mobile-bottom-gadgets-container .weather-widget-container {
+        /* Include weather widget for mobile bottom */
+        width: 100%;
+
+        /* Take full width within container */
+        max-width: none;
+
+        /* Remove fixed max-width for mobile */
+        margin-bottom: 15px;
+
+        /* Spacing between blocks */
+        margin-left: 0;
+
+        /* Remove specific left/right margins for mobile full width */
         margin-right: 0;
     }
 
@@ -337,24 +510,35 @@
     }
 
     .mobile-bottom-gadgets-container .weather-widget-container {
-        margin-top: 0; /* Remove top margin when moved to bottom */
-        margin-bottom: 15px; /* Consistent spacing */
+        margin-top: 0;
+
+        /* Remove top margin when moved to bottom */
+        margin-bottom: 15px;
+
+        /* Consistent spacing */
     }
 
     /* Adjust weather widget elements for mobile full width */
     .mobile-bottom-gadgets-container .weather-input-group input,
-    .mobile-bottom-gadgets-container .weather-input-group button {
-        width: 80%; /* Adjust width for mobile input/button */
+        .mobile-bottom-gadgets-container .weather-input-group button {
+        width: 80%;
+
+        /* Adjust width for mobile input/button */
     }
 }
 
 /* Landscape mobile (wider than 768px but less than desktop breakpoint) will use desktop sidebar layout */
 @media (min-width: 769px) {
     .mobile-top-gadgets-container,
-    .mobile-bottom-gadgets-container {
-        display: none !important; /* Hide mobile containers on desktop/landscape tablet */
+        .mobile-bottom-gadgets-container {
+        display: none !important;
+
+        /* Hide mobile containers on desktop/landscape tablet */
     }
+
     .desktop-sidebar {
-        display: flex !important; /* Ensure desktop sidebar is visible */
+        display: flex !important;
+
+        /* Ensure desktop sidebar is visible */
     }
 }
