@@ -86,14 +86,21 @@ nav.main-nav ul li {
   margin: 0 15px;
 }
 
-nav.main-nav ul li a {
+/* Apply the new styles globally for .main-nav a */
+.main-nav a {
   text-decoration: none;
   color: #000;
-  font-weight: 500; /* Reduced font weight */
   font-family: 'Oswald', sans-serif;
-  font-size: 14px; /* Changed font size to 14px */
+  font-size: 12px; /* Updated font size */
+  font-weight: 400; /* Updated font weight */
+  letter-spacing: 0.03em; /* Added letter spacing */
   text-transform: uppercase; /* Ensure ALL CAPS */
-  line-height: 1.5em; /* Increased line height */
+  line-height: 1.5em; /* Keep existing line height */
+}
+
+/* Hover effect for .main-nav a */
+.main-nav a:hover {
+  font-weight: 700;
 }
 
 /* Styl dla przycisku menu hamburger */
