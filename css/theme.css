@@ -450,14 +450,6 @@ nav.main-nav ul li {
 
 @media (max-width: 480px) {
   header h1 {
-    font-size: 1.5em; /* This rule was already present, keeping it for comparison */
-  }
-
-  /* Adjust positions for smaller screens */
-  #search-toggle {
-    left: 45px;
-  }
-  #menu-toggle {
-    left: 10px;
+    font-size: 1rem; /* ~16px – minimal, clean for phones */
   }
 }
