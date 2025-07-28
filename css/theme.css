@@ -37,7 +37,7 @@ header {
 }
 
 header h1 {
-  font-size: 1.6rem; /* Reduced font size for header title */
+  font-size: 20px;
   font-family: 'Libre Baskerville', serif; /* Updated from Playfair Display SC */
   color: #000;
   letter-spacing: 0.05em;
