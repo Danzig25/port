@@ -319,6 +319,20 @@ nav.main-nav ul li {
   text-align: center;
 }
 
+/* New rules added as per user's request */
+.article-title {
+  font-family: 'Merriweather', serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.article-body p,
+.lead {
+  font-family: 'Merriweather', serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
 /* --- Media queries dla responsywności (mobile) --- */
 @media (max-width: 768px) {
   /* Main navigation bar is now visible on mobile */
