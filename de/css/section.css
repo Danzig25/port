@@ -35,23 +35,22 @@
 }
 
 .article-title {
-    font-size: 2.5em;
+    font-size: 24px;
 
     /* Larger font for main article title */
     margin-bottom: 15px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Merriweather', serif;
 
     /* Consistent with header title */
     color: #000;
 }
 
 .lead {
-    font-size: 1.2em;
+    font-size: 24px;
 
     /* Slightly larger for lead paragraph */
     font-weight: bold;
     margin-bottom: 20px;
-    line-height: 1.4;
     font-family: 'Merriweather', serif;
 
     /* Example font for article body */

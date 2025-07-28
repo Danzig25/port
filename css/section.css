@@ -35,11 +35,11 @@
 }
 
 .article-title {
-    font-size: 2.5em;
+    font-size: 24px;
 
     /* Larger font for main article title */
     margin-bottom: 15px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Merriweather', serif;
 
     /* Consistent with header title */
     color: #000;
