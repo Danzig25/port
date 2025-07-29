@@ -7,12 +7,50 @@
         <meta content="Opis artykułu na stronie sekcji." name="description"/>
         <link href="https://fonts.googleapis.com" rel="preconnect"/>
         <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <!-- All font imports from index.html are added here for consistency -->
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&amp;display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=ADLaM+Display&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=AR+One+Sans&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;family=Playfair+Display:wght@700&amp;family=Oswald:wght@500&amp;display=swap" rel="stylesheet"/>
+        <!-- Existing CSS files -->
         <link href="css/theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/section.css" rel="stylesheet" type="text/css"/>
+        <style>
+           .article-actions {
+             display: flex; /* Use flexbox for layout */
+             justify-content: center; /* Center items horizontally */
+             flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+             gap: 10px; /* Add some space between buttons */
+           }
+
+           .article-actions a,
+           .article-actions button {
+             color: inherit;
+             text-decoration: none;
+             /* Explicitly set font-family for consistency */
+             font-family: 'Merriweather', serif;
+             font-weight: 400; /* Ensure consistent weight */
+             /* Add padding and border similar to buttons if needed, or rely on existing CSS */
+             padding: 8px 15px; /* Example padding to make links look more like buttons */
+             border: 1px solid #ccc; /* Example border */
+             border-radius: 5px; /* Example rounded corners */
+             background-color: #f0f0f0; /* Example background */
+             cursor: pointer;
+             display: inline-block; /* Treat anchors like blocks for padding/border */
+           }
+
+           /* Adjust button specific styles if necessary for finer control */
+           .article-actions button {
+             /* Any specific button overrides can go here if needed */
+           }
+        </style>
     </head>
     <body>
         <header>
@@ -110,12 +148,11 @@
                         Między popękanymi wieżyczkami Śluzy pływają kajaki i puste butelki po energetykach. I nikt już nie mówi: „Tam, przy moście, był łabędź. Duży, biały. Nie bał się ludzi.”</p>
                 </div>
                 <div class="article-actions">
-                    <p><a href="#">[ Read on one page ]</a></p>
-                    <p><a href="#">[ Next article ]</a></p>
-                    <p><a href="#">[ Comment ]</a></p>
-                    <p><a href="#">[ Share ]</a></p>
-                    <p><a href="#">[ Copy link ]</a></p>
-                    <p><a href="#">[ Print PDF ]</a></p>
+                    <a href="index.html">Start page</a>
+                    <a href="comments.html">Comment</a>
+                    <button onclick="navigator.share({url: window.location.href})">Share</button>
+                    <button onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+                    <button onclick="window.print()">Print</button>
                 </div>
                 <div class="section-separator"></div>
                 <div class="editorial-info">
