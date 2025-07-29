@@ -90,9 +90,17 @@
 </head>
 <body>
     <div class="support-widget">
-        <a href="#" class="vista-button btn-blue">☕ Support Free Press – Buy Coffee</a>
-        <a href="#" class="vista-button btn-red">✉️ Subscribe</a>
+        <a href="https://buycoffee.to/danziger" class="vista-button btn-blue" id="supportButton">📰 Support free press</a>
+        <a href="mailto:redakcja@danziger.org?subject=Subskrypcja" class="vista-button btn-red">✉️ Subscribe</a>
         <a href="archiwum.html" class="vista-button btn-grey">📁 Archive</a>
     </div>
+
+    <script>
+        document.getElementById('supportButton').addEventListener('click', function(event) {
+            // Open the additional links in new tabs/windows
+            window.open('https://patronite.pl/danziger', '_blank');
+            window.open('https://zrzutka.pl/danziger', '_blank');
+        });
+    </script>
 </body>
 </html>
