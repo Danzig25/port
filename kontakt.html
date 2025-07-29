@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Skontaktuj się z nami</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .kontakt-container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 2rem;
+      background-color: #f5f5f5;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form p {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 style="text-align:center;">Skontaktuj się z nami</h1>
+    </div>
+  </header>
+  <main>
+    <div class="kontakt-container">
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none">
+          <label>Nie wypełniaj: <input name="bot-field"></label>
+        </p>
+        <p>
+          <label>Imię:<br><input type="text" name="name" required></label>
+        </p>
+        <p>
+          <label>E-mail:<br><input type="email" name="email" required></label>
+        </p>
+        <p>
+          <label>Wiadomość:<br><textarea name="message" required></textarea></label>
+        </p>
+        <p>
+          <button type="submit">Wyślij</button>
+        </p>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
