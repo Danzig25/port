@@ -1,148 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="pl">
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>Danziger Chronograf – Skontaktuj się z nami</title>
-        <meta content="Formularz kontaktowy na stronie sekcji." name="description"/>
-        <link href="https://fonts.googleapis.com" rel="preconnect"/>
-        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&amp;display=swap" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
-        <link href="css/theme.css" rel="stylesheet" type="text/css"/>
-        <link href="css/section.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .kontakt-container {
-                max-width: 600px; /* Adjusted from 800px in freesupport.html for the contact form */
-                margin: 100px auto;
-                padding: 2rem;
-                background-color: #f5f5f5;
-                border-radius: 12px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            }
-            .kontakt-container h1 {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-                text-align: center; /* Centered the heading for consistency */
-            }
-            form p {
-                margin-bottom: 1rem;
-            }
-            label {
-                display: block;
-                margin-bottom: 0.5rem;
-                font-weight: bold;
-            }
-            input, textarea, button {
-                width: 100%;
-                padding: 0.6rem;
-                font-size: 1rem;
-                border-radius: 6px;
-                border: 1px solid #ccc;
-            }
-            button {
-                background-color: #333;
-                color: white;
-                cursor: pointer;
-            }
-            button:hover {
-                background-color: #555;
-            }
-        </style>
-    
+<head>
+  <meta charset="UTF-8">
+  <title>Kontakt | Danziger Reporter</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 20px;
+      background: #fdfdfd;
+      color: #222;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 20px 0 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+    textarea {
+      height: 160px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      border: none;
+    }
+  </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
-    <body>
-        <header>
-            <a class="header-link" href="index.html"> <h1 style="font-family: 'Libre Baskerville', serif; font-size: 14px;">GDAŃSKI <img alt="Obraz Logo Danziger Chronograf" src="https://i.postimg.cc/J4MBqtsY/sw-akt-tlo.jpg"/> REPORTER</h1> </a>
-        </header>
-        <nav class="main-nav">
-            <ul>
-                <li> <a href="stand.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">STANDPUNKT</a>
-                </li>
-                <li> <a href="prawo.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">PRAWO</a>
-                </li>
-                <li> <a href="lokalnie.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">LOKALNIE</a>
-                </li>
-                <li> <a href="dobrze.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">DOBRZE NA DZIŚ</a>
-                </li>
-                <li> <a href="notpl.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">OBYWATELE NIE PL</a>
-                </li>
-                <li> <a href="kartka.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">KARTKA Z HISTORII</a>
-                </li>
-                <li> <a href="de/chronograf.html" style="font-family: 'Oswald', sans-serif; font-size: 12px;">DANZIGER CHRONOGRAF</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="mobile-top-gadgets-container">
-            <iframe class="clock-iframe" scrolling="no" src="swiss.html" title="Swiss Railway Clock">
-</iframe>
-            <iframe class="calendar-iframe" scrolling="no" src="cal.html" title="Vintage Calendar">
-</iframe>
-        </div>
-        <div class="main-layout-wrapper">
-            <div class="main-content">
-                <div class="ads google article-top-ad">
-                    </div>
-                <div class="kontakt-container">
-                  <h1>Skontaktuj się z nami</h1>
-                  <form name="contact" method="POST" data-netlify="true" action="/dziekujemy.html" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="contact">
-                    <p style="display:none">
-                      <label>Nie wypełniaj: <input name="bot-field"></label>
-                    </p>
-                    <p>
-                      <label>Imię:<br><input type="text" name="name" required></label>
-                    </p>
-                    <p>
-                      <label>E-mail:<br><input type="email" name="email" required></label>
-                    </p>
-                    <p>
-                      <label>Wiadomość:<br><textarea name="message" required></textarea></label>
-                    </p>
-                    <p>
-                      <button type="submit">Wyślij</button>
-                    </p>
-                  </form>
-                </div>
-                <div class="section-separator"></div>
-                <div class="editorial-info">
-                    <p>Redakcja. ul. Nebelgasse 12, Niederstadt, Danzig</p> <a class="contact-btn" href="kontakt.html">Skontaktuj się z nami</a>
-                </div>
-            </div>
-            <div class="vertical-strip"></div>
-            <aside class="sidebar kontener-szary desktop-sidebar">
-                <div class="clock-calendar-row">
-                    <iframe class="clock-iframe" scrolling="no" src="swiss.html" title="Swiss Railway Clock">
-</iframe>
-                    <iframe class="calendar-iframe" scrolling="no" src="cal.html" title="Vintage Calendar">
-</iframe>
-                </div>
-                <iframe height="600" scrolling="no" src="wetter.html" style="border: none; max-width: 280px; display: block; margin: 0 auto; " width="100%"></iframe>
-                <div class="support-newsletter-section">
-                    <iframe height="180" scrolling="no" src="support.html" style="border: none; max-width: 280px; display: block; margin: 0 auto; " width="100%">
-</iframe>
-                </div>
-                <div class="ads google sidebar-bottom-ad">
-                    <p>Reklama Google (na dole sidebara)</p>
-                </div>
-            </aside>
-        </div>
-        <div class="mobile-bottom-gadgets-container">
-            <iframe height="600" scrolling="no" src="wetter.html" style="border: none; max-width: 280px; display: block; margin: 0 auto; " width="100%"></iframe>
-            <div class="support-newsletter-section">
-                <iframe height="180" scrolling="no" src="support.html" style="border: none; max-width: 280px; display: block; margin: 0 auto; " width="100%">
-</iframe>
-            </div>
-            <div class="ads google sidebar-bottom-ad">
-                <p>Reklama Google (na dole sidebara)</p>
-            </div>
-        </div>
-        <footer>
-</footer>
-        <script>
-    // Weather Widget Script - REMOVED AS IT'S NOW IN wetter.html
+<body>
+
+  <h1>Skontaktuj się z redakcją</h1>
+
+  <form id="kontakt-form">
+    <label>Imię i nazwisko:
+      <input type="text" name="name" required>
+    </label>
+
+    <label>Adres e-mail:
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Wiadomość:
+      <textarea name="message" required></textarea>
+    </label>
+
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <script>
+    (function(){
+      emailjs.init("PGsn7ZkHeptD5mWTv");
+    })();
+
+    document.getElementById('kontakt-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_ihqzngg', 'template_rnoi2ax', this)
+        .then(function() {
+          window.location.href = "/dziekujemy.html";
+        }, function(error) {
+          alert("Błąd wysyłania: " + JSON.stringify(error));
+        });
+    });
   </script>
-    </body>
+
+</body>
 </html>
