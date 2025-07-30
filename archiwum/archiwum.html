@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Archiwum | danziger.report</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #f4f4f4;
+      color: #222;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #searchBox {
+      width: calc(100% - 120px);
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #999;
+      background: #fff;
+    }
+    #searchButton {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      background: #222;
+      color: #fff;
+      border: none;
+    }
+    .entry {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #aaa;
+    }
+    .entry a {
+      font-weight: bold;
+      color: #003366;
+      text-decoration: none;
+    }
+    .entry a:hover {
+      text-decoration: underline;
+    }
+    .excerpt {
+      font-size: 14px;
+      color: #444;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archiwum danziger.report</h1>
+  <div>
+    <input type="text" id="searchBox" placeholder="Szukaj tytułu, daty, słowa lub fragmentu..." />
+    <button id="searchButton">Szukaj</button>
+  </div>
+
+  <div id="results">
+    <!-- Lista artykułów zostanie tutaj wygenerowana -->
+  </div>
+
+  <script>
+    const entries = [
+      {
+        file: "lokalnie.26.07.25.Festiwal Kina Plenerowego w Sopocie.html",
+        title: "Festiwal Kina Plenerowego w Sopocie",
+        date: "26.07.25",
+        excerpt: "Relacja z wydarzenia przy Placu Wolności. Seans: 'Zegary i ludzie'."
+      },
+      {
+        file: "finanse.12.06.25.Złoto jako wehikuł wartości.html",
+        title: "Złoto jako wehikuł wartości",
+        date: "12.06.25",
+        excerpt: "Analiza monetarna: złoto w czasach niestabilności, trend historyczny i NGO."
+      },
+      {
+        file: "prawo.03.05.25.Analiza NGO O przez Le Sep.html",
+        title: "Analiza NGO O przez Le Sep",
+        date: "03.05.25",
+        excerpt: "Komentarz prawniczy w stylu Le Sepa. Ustawa o podmiotach nierejestrowanych."
+      },
+      {
+        file: "rozmowy.23.07.25.Protokół Redakcji Transatlantyku.html",
+        title: "Protokół Redakcji Transatlantyku",
+        date: "23.07.25",
+        excerpt: "Rejestr ustaleń: styl, zegary, interfejs DOS, .txt jako format bazowy."
+      }
+      // Dodaj kolejne wpisy w tym samym formacie
+    ];
+
+    const resultsDiv = document.getElementById('results');
+    const searchBox = document.getElementById('searchBox');
+    const searchButton = document.getElementById('searchButton');
+
+    function renderResults(filter = '') {
+      resultsDiv.innerHTML = '';
+      const lower = filter.toLowerCase();
+      const filtered = entries.filter(entry =>
+        entry.title.toLowerCase().includes(lower) ||
+        entry.date.includes(lower) ||
+        entry.excerpt.toLowerCase().includes(lower) ||
+        entry.file.toLowerCase().includes(lower)
+      );
+
+      if (filtered.length === 0) {
+        resultsDiv.innerHTML = "<p>Brak wyników.</p>";
+        return;
+      }
+
+      filtered.forEach(entry => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'entry';
+
+        const link = document.createElement('a');
+        link.href = `/archiwum/${entry.file}`;
+        link.textContent = `${entry.date} – ${entry.title}`;
+        wrapper.appendChild(link);
+
+        const excerpt = document.createElement('div');
+        excerpt.className = 'excerpt';
+        excerpt.textContent = entry.excerpt;
+        wrapper.appendChild(excerpt);
+
+        resultsDiv.appendChild(wrapper);
+      });
+    }
+
+    searchButton.addEventListener('click', () => {
+      renderResults(searchBox.value);
+    });
+
+    searchBox.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        renderResults(searchBox.value);
+      }
+    });
+
+    renderResults(); // start
+  </script>
+</body>
+</html>
