@@ -1,143 +1,262 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8">
-  <title>Archiwum | danziger.report</title>
-  <style>
-    body {
-      font-family: monospace;
-      background-color: #f4f4f4;
-      color: #222;
-      padding: 40px;
+<!DOCTYPE html> 
+<html lang="pl"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Archiwum | danziger.report</title>         
+        <meta name="description" content="Opis artykułu na stronie sekcji."> 
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:wght@400;700&display=swap"> 
+        <link href="../css/theme.css" rel="stylesheet" type="text/css"> 
+        <link href="../css/section.css" rel="stylesheet" type="text/css">
+        <style>
+            .entry { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px dashed #aaa; }
+            .entry a { font-weight: bold; color: #003366; text-decoration: none; }
+            .entry a:hover { text-decoration: underline; }
+            .excerpt { font-size: 14px; color: #444; margin-top: 4px; }
+            input[type="text"] { 
+                width: calc(100% - 120px); 
+                padding: 12px; 
+                font-size: 16px; 
+                margin-bottom: 20px; 
+                border: 1px solid #999; 
+                background: #fff; 
+                box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+            }
+            button { 
+                padding: 12px 20px; 
+                font-size: 16px; 
+                margin-left: 10px; 
+                cursor: pointer; 
+                background: #222; 
+                color: #fff; 
+                border: none; 
+                box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+            }
+            #results {
+                margin-top: 20px;
+            }
+        </style>
+    </head>     
+    <body> 
+        <header> 
+            <button id="menu-toggle">☰</button>             
+            <button id="search-toggle"> 
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/> 
+                </svg>                 
+            </button>             <a href="../index.html" class="header-link"> <h1 style="font-family: 'Libre Baskerville', serif; font-size: 14px;">GDAŃSKI <img src="https://i.postimg.cc/J4MBqtsY/sw-akt-tlo.jpg" alt="Obraz Logo Danziger Chronograf"> REPORTER</h1> </a> 
+        </header>         
+        <nav class="main-nav"> 
+            <ul> 
+                <li> <a href="../stand.html">STANDPUNKT</a> 
+                </li>                 
+                <li> <a href="../prawo.html">PRAWO</a> 
+                </li>                 
+                <li> <a href="../lokalnie.html">LOKALNIE</a> 
+                </li>                 
+                <li> <a href="../dobrze.html">DOBRZE NA DZIŚ</a> 
+                </li>                 
+                <li> <a href="../notpl.html">OBYWATELE NIE PL</a> 
+                </li>                 
+                <li> <a href="../kartka.html">KARTKA Z HISTORII</a> 
+                </li>                 
+                <li> <a href="../de/chronograf.html">DANZIGER CHRONOGRAF</a> 
+                </li>                 
+            </ul>             
+        </nav>         
+        <div id="menu-overlay"></div>         
+        <div id="offcanvas-menu"> 
+            <ul> 
+                <li> <a href="../stand.html">STANDPUNKT</a> 
+                </li>                 
+                <li> <a href="../prawo.html">PRAWO</a> 
+                </li>                 
+                <li> <a href="../lokalnie.html">LOKALNIE</a> 
+                </li>                 
+                <li> <a href="../dobrze.html">DOBRZE NA DZIŚ</a> 
+                </li>                 
+                <li> <a href="../notpl.html">OBYWATELE NIE PL</a> 
+                </li>                 
+                <li> <a href="../kartka.html">KARTKA Z HISTORII</a> 
+                </li>                 
+                <li> <a href="../de/chronograf.html">DANZIGER CHRONOGRAF</a> 
+                </li>                 
+                <li><a href="../lm.html">LUMEN MUNDI</a></li>
+                <li><a href="../west.html">Z ZACHODU</a></li>
+                <li><a href="../fin.html">GDAŃSKI PORTFEL</a></li>
+                <li><a href="../pixel.html">PIXEL & PLOT: SPRAWDZIMY TO?</a></li>
+            </ul>             
+        </div>         
+        <div class="mobile-top-gadgets-container"> 
+            <iframe src="../swiss.html" title="Swiss Railway Clock" class="clock-iframe" scrolling="no"> 
+</iframe>             
+            <iframe src="../cal.html" title="Vintage Calendar" class="calendar-iframe" scrolling="no"> 
+</iframe>             
+        </div>         
+        <div class="main-layout-wrapper"> 
+            <div class="main-content"> 
+                <div class="ads google article-top-ad"> 
+</div>                 
+                <h1 class="article-title" style="font-family: 'Merriweather', serif; font-size: 24px;">Archiwum danziger.report</h1> 
+                <p class="author-date">Data publikacji: 26 lipca 2025</p> 
+                <div class="article-body"> 
+                    <div class="ads google">
+                        <p>Google AdSense Ad 1</p>
+                    </div>
+                    <div>
+                        <input type="text" id="searchBox" placeholder="Szukaj tytułu, daty, słowa lub fragmentu..." />
+                        <button id="searchButton">Szukaj</button>
+                    </div>
+                    <div id="results"></div>
+
+                    <script>
+                        const entries = [
+                        {
+                            file: "dobrze.Kaszubska jednodniówka.26.07.html",
+                            title: "Kaszubska jednodniówka – smak, widok, powietrze. Są takie dni w środku sezonu, kiedy trzeba uciec z linii frontu turystycznego.",
+                            date: "26.07.25",
+                            excerpt: "Są takie dni w środku sezonu, kiedy trzeba uciec z linii frontu turystycznego. Zostawić Długi Targ, Molo i kolejki do zapiekanek – i pojechać w głąb. Proponujemy: jednodniowy wypad na Kaszuby. Bez wielkich walizek, bez bookingów, tylko z plecakiem, mapą i głodem. Start: Gdańsk Zachodni (przystanek Łostowice Świętokrzyska). Autobus w kierunku Kościerzyny, najlepiej wsiąść ok. 7:30. Wysiąść w Szymbarku lub Gołubiu."
+                        },
+                        {
+                            file: "prawo_Bruderferajna Wileńska – Gdyńskie NGO.26.07.25.html",
+                            title: "Bruderferajna Wileńska – Gdyńskie NGO 'O'. Kazus prawno-historyczny",
+                            date: "26.07.25",
+                            excerpt: "Na wstępie chciałbym serdecznie podziękować autorce książki Bruderferajn za wnikliwą analizę jednego z najbardziej mrocznych rozdziałów historii II RP"
+                        },
+                        {
+                            "file": "fin_GELG_26.07.25.html",
+                            "title": "Złoto wraca na tron. Dlaczego metal pogardy stał się metalem przyszłości",
+                            "date": "26.07.25",
+                            "excerpt": "Złoto wraca na tron. Dlaczego metal pogardy stał się metalem przyszłości\nW roku 1971 prezydent Nixon ogłosił zamknięcie złotego okna. Światowy system finansowy – do tej pory oparty na międzynarodowej wymienialności dolara na złoto – został definitywnie porzucony."
+                        },
+						{
+                            "file": "kartka_Jak powstało Trójmiasto.28.07.25.html",
+                            "title": "Jak powstało Trójmiasto",
+                            "date": "28.07.25",
+                            "excerpt": "Jak narodziła się idea Trójmiasta ? Pomysł połączenia trzech nadmorskich miast pojawił się tuż po II wojnie światowej kiedy odbudowa regionu wymagała zintegrowanego podejścia."
+                        }
+						
+                        ];
+
+                        const resultsDiv = document.getElementById('results');
+                        const searchBox = document.getElementById('searchBox');
+                        const searchButton = document.getElementById('searchButton');
+
+                        function renderResults(filter = '') {
+                        resultsDiv.innerHTML = '';
+                        const lower = filter.toLowerCase();
+                        const filtered = entries.filter(entry =>
+                            entry.title.toLowerCase().includes(lower) ||
+                            entry.date.includes(lower) ||
+                            entry.excerpt.toLowerCase().includes(lower) ||
+                            entry.file.toLowerCase().includes(lower)
+                        );
+
+                        if (filtered.length === 0) {
+                            resultsDiv.innerHTML = "<p>Brak wyników.</p>";
+                            return;
+                        }
+
+                        filtered.forEach(entry => {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'entry';
+
+                            const link = document.createElement('a');
+                            link.href = entry.file;
+                            link.textContent = `${entry.date} – ${entry.title}`;
+                            wrapper.appendChild(link);
+
+                            const excerpt = document.createElement('div');
+                            excerpt.className = 'excerpt';
+                            excerpt.textContent = entry.excerpt;
+                            wrapper.appendChild(excerpt);
+
+                            resultsDiv.appendChild(wrapper);
+                        });
+                        }
+
+                        searchButton.addEventListener('click', () => {
+                        renderResults(searchBox.value);
+                        });
+
+                        searchBox.addEventListener('keydown', e => {
+                        if (e.key === 'Enter') {
+                            renderResults(searchBox.value);
+                        }
+                        });
+
+                        renderResults(); // start
+                    </script>
+                </div>                 
+                
+<div class="article-actions">
+    <a href="../index.html" role="button" style="font-weight: 400;">Start page</a>
+    <a href="../comments.html" role="button" style="font-weight: 400;">Comment</a>
+    <a href="#" onclick="navigator.share({url: window.location.href})" role="button" style="font-weight: 400;">Share</a>
+    <a href="#" onclick="navigator.clipboard.writeText(window.location.href)" role="button" style="font-weight: 400;">Copy link</a>
+    <a href="#" onclick="window.print()" role="button" style="font-weight: 400;">Print</a>
+</div>
+                 
+                <div class="section-separator"></div>                 
+                <div class="editorial-info"> 
+                    <p>Redakcja. ul. Nebelgasse 12, Niederstadt, Danzig</p> <a href="../kontakt.html" class="contact-btn">Skontaktuj się z nami</a> 
+                </div>                 
+            </div>             
+            <div class="vertical-strip"></div>             
+            <aside class="sidebar kontener-szary desktop-sidebar"> 
+                <div class="clock-calendar-row"> 
+                    <iframe src="../swiss.html" title="Swiss Railway Clock" class="clock-iframe" scrolling="no"> 
+</iframe>                     
+                    <iframe src="../cal.html" title="Vintage Calendar" class="calendar-iframe" scrolling="no"> 
+</iframe>                     
+                </div>                 
+                <iframe src="../wetter.html" width="100%" height="600" style="border: none; max-width: 280px; display: block; margin: 0 auto;" scrolling="no"></iframe>                 
+                <div class="support-newsletter-section"> 
+                    <iframe src="../support.html" width="100%" height="180" style="border: none; max-width: 280px; display: block; margin: 0 auto;" scrolling="no"> 
+</iframe>                     
+                </div>                 
+                <div class="ads google sidebar-bottom-ad"> 
+                    <p>Reklama Google (na dole sidebara)</p> 
+                </div>                 
+            </aside>             
+        </div>         
+        <div class="mobile-bottom-gadgets-container"> 
+            <iframe src="../wetter.html" width="100%" height="600" style="border: none; max-width: 280px; display: block; margin: 0 auto;" scrolling="no"></iframe>             
+            <div class="support-newsletter-section"> 
+                <iframe src="../support.html" width="100%" height="180" style="border: none; max-width: 280px; display: block; margin: 0 auto;" scrolling="no"> 
+</iframe>                     
+            </div>             
+            <div class="ads google sidebar-bottom-ad"> 
+                <p>Reklama Google (na dole sidebara)</p> 
+            </div>             
+        </div>         
+        <footer> 
+</footer>         
+        <script>
+    // Offcanvas menu script
+    const toggle = document.getElementById('menu-toggle');
+    const menu   = document.getElementById('offcanvas-menu');
+    const overlay= document.getElementById('menu-overlay');
+
+    // Function to toggle menu and overlay
+    function toggleMenu() {
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
     }
-    h1 {
-      margin-bottom: 20px;
+
+    // Event listeners for menu toggle and overlay click
+    if (toggle) {
+      toggle.addEventListener('click', toggleMenu);
     }
-    #searchBox {
-      width: calc(100% - 120px);
-      padding: 12px;
-      font-size: 16px;
-      margin-bottom: 20px;
-      border: 1px solid #999;
-      background: #fff;
+    if (overlay) {
+      overlay.addEventListener('click', toggleMenu);
     }
-    #searchButton {
-      padding: 12px 20px;
-      font-size: 16px;
-      margin-left: 10px;
-      cursor: pointer;
-      background: #222;
-      color: #fff;
-      border: none;
-    }
-    .entry {
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed #aaa;
-    }
-    .entry a {
-      font-weight: bold;
-      color: #003366;
-      text-decoration: none;
-    }
-    .entry a:hover {
-      text-decoration: underline;
-    }
-    .excerpt {
-      font-size: 14px;
-      color: #444;
-      margin-top: 4px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Archiwum danziger.report</h1>
-  <div>
-    <input type="text" id="searchBox" placeholder="Szukaj tytułu, daty, słowa lub fragmentu..." />
-    <button id="searchButton">Szukaj</button>
-  </div>
-
-  <div id="results">
-    <!-- Lista artykułów zostanie tutaj wygenerowana -->
-  </div>
-
-  <script>
-    const entries = [
-      {
-        file: "lokalnie.26.07.25.Festiwal Kina Plenerowego w Sopocie.html",
-        title: "Festiwal Kina Plenerowego w Sopocie",
-        date: "26.07.25",
-        excerpt: "Relacja z wydarzenia przy Placu Wolności. Seans: 'Zegary i ludzie'."
-      },
-      {
-        file: "finanse.12.06.25.Złoto jako wehikuł wartości.html",
-        title: "Złoto jako wehikuł wartości",
-        date: "12.06.25",
-        excerpt: "Analiza monetarna: złoto w czasach niestabilności, trend historyczny i NGO."
-      },
-      {
-        file: "prawo.03.05.25.Analiza NGO O przez Le Sep.html",
-        title: "Analiza NGO O przez Le Sep",
-        date: "03.05.25",
-        excerpt: "Komentarz prawniczy w stylu Le Sepa. Ustawa o podmiotach nierejestrowanych."
-      },
-      {
-        file: "rozmowy.23.07.25.Protokół Redakcji Transatlantyku.html",
-        title: "Protokół Redakcji Transatlantyku",
-        date: "23.07.25",
-        excerpt: "Rejestr ustaleń: styl, zegary, interfejs DOS, .txt jako format bazowy."
-      }
-      // Dodaj kolejne wpisy w tym samym formacie
-    ];
-
-    const resultsDiv = document.getElementById('results');
-    const searchBox = document.getElementById('searchBox');
-    const searchButton = document.getElementById('searchButton');
-
-    function renderResults(filter = '') {
-      resultsDiv.innerHTML = '';
-      const lower = filter.toLowerCase();
-      const filtered = entries.filter(entry =>
-        entry.title.toLowerCase().includes(lower) ||
-        entry.date.includes(lower) ||
-        entry.excerpt.toLowerCase().includes(lower) ||
-        entry.file.toLowerCase().includes(lower)
-      );
-
-      if (filtered.length === 0) {
-        resultsDiv.innerHTML = "<p>Brak wyników.</p>";
-        return;
-      }
-
-      filtered.forEach(entry => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'entry';
-
-        const link = document.createElement('a');
-        link.href = `/archiwum/${entry.file}`;
-        link.textContent = `${entry.date} – ${entry.title}`;
-        wrapper.appendChild(link);
-
-        const excerpt = document.createElement('div');
-        excerpt.className = 'excerpt';
-        excerpt.textContent = entry.excerpt;
-        wrapper.appendChild(excerpt);
-
-        resultsDiv.appendChild(wrapper);
-      });
-    }
-
-    searchButton.addEventListener('click', () => {
-      renderResults(searchBox.value);
-    });
-
-    searchBox.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        renderResults(searchBox.value);
-      }
-    });
-
-    renderResults(); // start
-  </script>
-</body>
+  </script>         
+    </body>     
 </html>
