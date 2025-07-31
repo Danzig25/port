@@ -28,6 +28,7 @@
       <h1>Komentarze</h1>
     </div>
   </header>
+
   <main>
     <div class="comments-container">
       <p><strong>PL:</strong> Pracujemy nad możliwością dodawania komentarzy na otwartym forum.</p>
@@ -36,16 +37,15 @@
     </div>
   </main>
 
+  <!-- Cookiebar loader -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Zmieniona ścieżka do cookiebar.html
-      fetch("/partials/cookiebar.html")
-        .then(res => res.ok ? res.text() : Promise.reject("Błąd ładowania cookiebar"))
-        .then(html => {
-          document.body.insertAdjacentHTML("beforeend", html);
-        })
-        .catch(err => console.error("Nie udało się załadować cookiebar:", err));
-    });
+    fetch('/partials/cookiebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+        if (typeof initCookieBar === 'function') initCookieBar();
+      });
   </script>
+  <script src="/partials/cookiebar.js"></script>
 </body>
 </html>
