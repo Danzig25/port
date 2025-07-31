@@ -23,8 +23,11 @@
 </div>
 
 <script>
-(function() {
+// POCZEKAJ aż element faktycznie będzie wczytany
+function initCookieBar() {
   const bar = document.querySelector('.cookie-bar');
+  if (!bar) return setTimeout(initCookieBar, 50); // próbuj ponownie co 50ms
+
   const acceptButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
 
   if (localStorage.getItem('cookiesAccepted')) {
@@ -50,5 +53,6 @@
     langPl.style.display = 'block';
     langDe.style.display = 'none';
   }
-})();
+}
+initCookieBar();
 </script>
