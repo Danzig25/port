@@ -1,3 +1,5 @@
+/* Zmieniono style, aby domyślnie pasek był widoczny,
+   a ukrywały go tylko style ze skryptu */
 .cookie-bar {
     position: fixed;
     bottom: 0;
@@ -30,8 +32,4 @@
 
 .cookie-bar button:hover {
     background-color: #0056b3;
-}
-
-.cookie-bar.hidden {
-    display: none;
 }
