@@ -1,41 +1,7 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <title>Cookie Test</title>
-  <style>
-    .cookie-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #f1f1f1;
-      color: #000;
-      padding: 1rem;
-      font-family: sans-serif;
-      font-size: 0.95rem;
-      box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
-      z-index: 9999;
-      text-align: center;
-    }
-    .cookie-bar .lang-block {
-      display: none; /* Domyślnie ukryte, JavaScript pokaże odpowiednią wersję */
-    }
-  </style>
-</head>
-<body>
+<div id="cookiebar-pl" style="display: none; background: #eee; padding: 15px;">
+  <p>Ta strona używa ciasteczek, by zapewnić poprawne działanie. <button id="accept-cookies-pl">Akceptuję</button></p>
+</div>
 
-  <div class="cookie-bar">
-    <div lang="pl" class="lang-block">
-      Ta strona używa ciasteczek, aby zapewnić najlepszą jakość korzystania z naszego serwisu.
-      <button id="accept-cookies-pl" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
-    </div>
-
-    <div lang="de" class="lang-block">
-      Diese Website verwendet Cookies, um Ihnen die bestmögliche Erfahrung zu gewährleisten.
-      <button id="accept-cookies-de" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akzeptieren</button>
-    </div>
-  </div>
-
-</body>
-</html>
+<div id="cookiebar-de" style="display: none; background: #eee; padding: 15px;">
+  <p>Diese Seite verwendet Cookies, um ordnungsgemäß zu funktionieren. <button id="accept-cookies-de">Akzeptieren</button></p>
+</div>

@@ -1,30 +1,19 @@
-function initCookieBar() {
-  const bar = document.querySelector('.cookie-bar');
-  if (!bar) return;
+(function () {
+  const cookieKey = "cookieAccepted";
+  if (localStorage.getItem(cookieKey) === "true") return;
 
-  const acceptButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
+  const lang = navigator.language.startsWith("de") ? "de" : "pl";
+  const barId = `cookiebar-${lang}`;
+  const btnId = `accept-cookies-${lang}`;
 
-  if (localStorage.getItem('cookiesAccepted')) {
-    bar.style.display = 'none';
-    return;
-  }
+  const bar = document.getElementById(barId);
+  const btn = document.getElementById(btnId);
 
-  acceptButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      localStorage.setItem('cookiesAccepted', 'true');
-      bar.style.display = 'none';
+  if (bar && btn) {
+    bar.style.display = "block";
+    btn.addEventListener("click", () => {
+      localStorage.setItem(cookieKey, "true");
+      bar.style.display = "none";
     });
-  });
-
-  const userLang = navigator.language || navigator.userLanguage;
-  const langPl = document.querySelector('[lang="pl"]');
-  const langDe = document.querySelector('[lang="de"]');
-
-  if (userLang.startsWith('de')) {
-    langPl.style.display = 'none';
-    langDe.style.display = 'block';
-  } else {
-    langPl.style.display = 'block';
-    langDe.style.display = 'none';
   }
-}
+})();
