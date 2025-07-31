@@ -1,85 +1,71 @@
-function initCookieBar() {
+// cookie-bar.js
+document.addEventListener('DOMContentLoaded', initCookieBar);
+
+async function initCookieBar() {
   const cookieBar = document.getElementById('cookie-bar');
   const acceptButton = document.getElementById('accept-cookies');
-  const cookieName = 'cookiesAccepted';
-  const localStorageKey = 'cookiesAccepted';
 
   if (!cookieBar || !acceptButton) {
+    console.warn('⚠️ Brak elementów cookieBar lub acceptButton');
     return setTimeout(initCookieBar, 100);
   }
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+  const isPrivacyBrowser = await checkPrivacyBrowser();
+
+  if (isPrivacyBrowser) {
+    console.log('🔒 Prywatna przeglądarka wykryta – usuwam pasek cookies');
+    cookieBar.remove(); // trwałe usunięcie paska
+    return;
   }
 
-  async function isPrivacyBrowser() {
-    // 1. Brave przez isBrave()
-    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
-      try {
-        const isBrave = await navigator.brave.isBrave();
-        if (isBrave) return true;
-      } catch (e) {
-        // ignoruj
-      }
-    }
+  const cookiesAccepted =
+    localStorage.getItem('cookiesAccepted') === 'true' ||
+    document.cookie.includes('cookiesAccepted=true');
 
-    // 2. Brave przez userAgent/vendor
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.includes('brave') || navigator.vendor === 'Brave Software, Inc.') {
-      return true;
-    }
-
-    // 3. Mullvad i inne – brak localStorage
-    try {
-      localStorage.setItem('test_cookie_bar', '1');
-      localStorage.removeItem('test_cookie_bar');
-    } catch (e) {
-      console.warn('localStorage blocked – traktujemy jako przeglądarkę prywatnościową:', e);
-      return true;
-    }
-
-    return false;
+  if (cookiesAccepted) {
+    console.log('✅ Ciasteczka wcześniej zaakceptowane – usuwam pasek');
+    cookieBar.remove();
+    return;
   }
 
-  isPrivacyBrowser().then((isPrivate) => {
-    if (isPrivate) {
-      console.log('Pasek cookies ukryty – prywatna przeglądarka wykryta (Brave, Mullvad itd).');
-      cookieBar.style.display = 'none';
-      return;
-    }
+  console.log('🍪 Wyświetlam pasek cookies');
+  cookieBar.style.display = 'flex';
 
-    // normalne przeglądarki
-    let isAccepted = false;
+  acceptButton.addEventListener('click', () => {
     try {
-      isAccepted =
-        localStorage.getItem(localStorageKey) === 'true' ||
-        getCookie(cookieName) === 'true';
-    } catch (e) {
-      console.warn('Brak dostępu do storage:', e);
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.cookie = 'cookiesAccepted=true; path=/; max-age=31536000; samesite=Lax';
+    } catch (err) {
+      console.warn('❌ Błąd przy zapisie ciasteczek:', err);
     }
 
-    if (isAccepted) {
-      cookieBar.style.display = 'none';
-      return;
-    }
-
-    // Pokaż pasek
-    cookieBar.style.display = 'flex';
-
-    acceptButton.addEventListener('click', () => {
-      try {
-        localStorage.setItem(localStorageKey, 'true');
-      } catch (e) {}
-
-      try {
-        document.cookie = `${cookieName}=true; path=/; max-age=31536000; samesite=Lax`;
-      } catch (e) {}
-
-      cookieBar.style.display = 'none';
-    });
+    cookieBar.remove();
   });
 }
 
-document.addEventListener('DOMContentLoaded', initCookieBar);
+async function checkPrivacyBrowser() {
+  // Brave przez navigator.brave
+  if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
+    try {
+      const isBrave = await navigator.brave.isBrave();
+      if (isBrave) return true;
+    } catch (_) {}
+  }
+
+  // Brave przez UA/vendor
+  const ua = navigator.userAgent.toLowerCase();
+  if (ua.includes('brave') || navigator.vendor === 'Brave Software, Inc.') {
+    return true;
+  }
+
+  // Mullvad i inne – brak localStorage
+  try {
+    localStorage.setItem('test_cookie_privacy', '1');
+    localStorage.removeItem('test_cookie_privacy');
+  } catch (err) {
+    console.warn('🛡️ localStorage zablokowane – uznaję za prywatnościową:', err);
+    return true;
+  }
+
+  return false;
+}
