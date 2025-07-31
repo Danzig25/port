@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
-
 <html lang="pl">
 <head>
-<meta charset="utf-8"/>
-<title>Archiwum</title>
-<link href="css/theme.css" rel="stylesheet"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<style>
+  <meta charset="UTF-8">
+  <title>Archiwum</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
     .archiwum-container {
       max-width: 600px;
       margin: 100px auto;
@@ -22,77 +20,34 @@
       text-align: center;
       font-size: 2rem;
     }
+    .back-button {
+      margin-top: 30px;
+    }
+    .back-button button {
+      font-size: 16px;
+      padding: 10px 20px;
+      border: 1px solid #000;
+      background-color: #fff;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-<header>
-<div class="container">
-<h1>Archiwum</h1>
-</div>
-</header>
-<main>
-<div class="archiwum-container"><a href="index.html" style="display: inline-block; margin-bottom: 1rem; font-weight: bold; text-decoration: none; color: #333; background: #eee; padding: 0.5rem 1rem; border-radius: 6px;">← Start page</a>
-<div>
-<h2>Wyszukiwanie w archiwum</h2>
-<p style="font-size:0.95rem; color:#555;">Wpisz fragment tytułu, działu, słowo kluczowe lub datę (np. 07/25, 26.07.25, 25):</p>
-<input id="searchInput" placeholder="Wyszukaj..." style="width:100%; padding:0.5rem; margin-bottom:1rem;" type="text"/>
-<button onclick="performSearch()" style="padding:0.5rem 1rem;">Szukaj</button>
-<p id="message" style="color:#a00; margin-top:0.5rem;"></p>
-<ul id="results" style="margin-top:1rem; text-align:left;"></ul>
-</div>
-</div>
-</main>
-<script>
-let files = [];
+  <header>
+    <div class="container">
+      <h1>Archiwum</h1>
+    </div>
+  </header>
+  <main>
+    <div class="archiwum-container">
+      <p><strong>PL:</strong> Trwają prace nad udostępnieniem archiwum dla publiczności.</p>
+      <p><strong>EN:</strong> Work is underway to make the archive available to the public.</p>
+      <p><strong>DE:</strong> Die Arbeiten zur öffentlichen Bereitstellung des Archivs sind im Gange.</p>
 
-fetch("archiwum/index.json")
-  .then(res => res.json())
-  .then(data => {
-    files = data;
-  });
-
-function normalize(text) {
-  return text
-    .toLowerCase()
-    .replace(/[ó]/g, "o")
-    .replace(/[ł]/g, "l")
-    .replace(/[ś]/g, "s")
-    .replace(/[ć]/g, "c")
-    .replace(/[ń]/g, "n")
-    .replace(/[żź]/g, "z")
-    .replace(/[ę]/g, "e")
-    .replace(/[ą]/g, "a")
-    .replace(/\s+/g, " ");
-}
-
-function performSearch() {
-  const input = normalize(document.getElementById("searchInput").value.trim());
-  const results = document.getElementById("results");
-  const message = document.getElementById("message");
-  results.innerHTML = "";
-  message.textContent = "";
-
-  if (!input) {
-    message.textContent = "Nie podano żadnego kryterium wyszukiwania.";
-    return;
-  }
-
-  const matches = files.filter(name =>
-    normalize(name).includes(input)
-  );
-
-  if (matches.length === 0) {
-    message.textContent = "Brak wyników.";
-  } else {
-    matches.forEach(match => {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = "archiwum/" + match;
-      a.textContent = match.replace(".html", "");
-      li.appendChild(a);
-      results.appendChild(li);
-    });
-  }
-}
-</script></body>
+      <div class="back-button">
+        <button onclick="location.href='../index.html'">BACK TO START PAGE</button>
+      </div>
+    </div>
+  </main>
+</body>
 </html>
