@@ -1,11 +1,10 @@
 function initCookieBar() {
   const cookieBar = document.getElementById('cookie-bar');
   const acceptButton = document.getElementById('accept-cookies');
-  const localStorageKey = 'cookiesAccepted';
   const cookieName = 'cookiesAccepted';
-  const sessionStorageKey = 'cookiesAcceptedSession';
 
   if (!cookieBar || !acceptButton) {
+    // Elementy jeszcze się nie załadowały – spróbuj ponownie za chwilę
     return setTimeout(initCookieBar, 100);
   }
 
@@ -13,44 +12,34 @@ function initCookieBar() {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
   }
 
-  // Sprawdź, czy użytkownik już zaakceptował cookies
-  let isAccepted = false;
-  try {
-    isAccepted =
-      localStorage.getItem(localStorageKey) === 'true' ||
-      getCookie(cookieName) === 'true' ||
-      sessionStorage.getItem(sessionStorageKey) === 'true';
-  } catch (e) {
-    console.warn('Storage niedostępny:', e);
-  }
+  // Sprawdzenie, czy użytkownik już zaakceptował ciasteczka
+  const isAccepted = getCookie(cookieName) === 'true';
 
   if (isAccepted) {
+    // Jeśli zaakceptowane – ukryj pasek
     cookieBar.style.display = 'none';
     return;
   }
 
-  // Pokaż pasek, jeśli cookies nie zostały jeszcze zaakceptowane
+  // W przeciwnym razie – pokaż pasek
   cookieBar.style.display = 'flex';
 
+  // Obsługa kliknięcia przycisku "Akceptuję"
   acceptButton.addEventListener('click', () => {
+    // Ustaw ciasteczko ważne przez 1 rok
     try {
-      localStorage.setItem(localStorageKey, 'true');
-    } catch (e) {}
-
-    try {
-      // Ustaw cookie na rok (31536000 sekund)
       document.cookie = `${cookieName}=true; path=/; max-age=31536000; samesite=Lax`;
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Nie udało się zapisać ciasteczka:', e);
+    }
 
-    try {
-      sessionStorage.setItem(sessionStorageKey, 'true');
-    } catch (e) {}
-    
-    // Ukryj pasek po kliknięciu
+    // Ukryj pasek natychmiast
     cookieBar.style.display = 'none';
   });
 }
 
-document.addEventListener("DOMContentLoaded", initCookieBar);
+// Uruchom po załadowaniu DOM
+document.addEventListener('DOMContentLoaded', initCookieBar);
