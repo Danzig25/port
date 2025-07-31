@@ -18,47 +18,24 @@
       z-index: 9999;
       text-align: center;
     }
+    .cookie-bar .lang-block {
+      display: none; /* Domyślnie ukryte, JavaScript pokaże odpowiednią wersję */
+    }
   </style>
 </head>
 <body>
 
-  <div class="cookie-bar" id="cookieBar">
-    Ta strona używa ciasteczek, aby zapewnić najlepszą jakość korzystania z naszego serwisu.
-    <button id="acceptCookieBtn" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
+  <div class="cookie-bar">
+    <div lang="pl" class="lang-block">
+      Ta strona używa ciasteczek, aby zapewnić najlepszą jakość korzystania z naszego serwisu.
+      <button id="accept-cookies-pl" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
+    </div>
+
+    <div lang="de" class="lang-block">
+      Diese Website verwendet Cookies, um Ihnen die bestmögliche Erfahrung zu gewährleisten.
+      <button id="accept-cookies-de" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akzeptieren</button>
+    </div>
   </div>
-
-  <script>
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    function setCookie(name, value, days) {
-      let expires = "";
-      if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + value + expires + "; path=/";
-    }
-
-    window.addEventListener("load", () => {
-      const bar = document.getElementById("cookieBar");
-      const button = document.getElementById("acceptCookieBtn");
-
-      if (getCookie("cookiesAccepted") === "true") {
-        bar.remove();
-        return;
-      }
-
-      button.addEventListener("click", () => {
-        setCookie("cookiesAccepted", "true", 365); // zapisane na rok
-        bar.remove();
-      });
-    });
-  </script>
 
 </body>
 </html>
