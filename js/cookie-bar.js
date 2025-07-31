@@ -7,7 +7,12 @@ function initCookieBar() {
         return setTimeout(initCookieBar, 100);
     }
 
-    const isAccepted = localStorage.getItem(localStorageKey) === 'true';
+    let isAccepted = false;
+    try {
+        isAccepted = localStorage.getItem(localStorageKey) === 'true';
+    } catch (e) {
+        console.warn('Brak dostępu do localStorage:', e);
+    }
 
     if (isAccepted) {
         cookieBar.style.display = 'none';
@@ -17,9 +22,13 @@ function initCookieBar() {
     cookieBar.style.display = 'flex';
 
     acceptButton.addEventListener('click', () => {
-        localStorage.setItem(localStorageKey, 'true');
+        try {
+            localStorage.setItem(localStorageKey, 'true');
+        } catch (e) {
+            console.warn('Nie można zapisać cookies:', e);
+        }
         cookieBar.style.display = 'none';
     });
 }
 
-initCookieBar();
+document.addEventListener("DOMContentLoaded", initCookieBar);
