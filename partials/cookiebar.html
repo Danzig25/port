@@ -1,84 +1,54 @@
-<div class="cookie-bar">
-    <p>
-        <strong lang="pl">Używamy plików cookie, aby zapewnić najlepszą jakość korzystania z naszej witryny.</strong>
-        <strong lang="de">Wir verwenden Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten.</strong>
-    </p>
-    <button id="accept-cookies-pl" lang="pl">Akceptuję</button>
-    <button id="accept-cookies-de" lang="de">Ich akzeptiere</button>
+<div class="cookie-bar" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f1f1f1;
+  color: #000;
+  padding: 1rem;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+  z-index: 9999;
+  text-align: center;
+">
+  <div lang="pl">
+    Ta strona używa ciasteczek, aby zapewnić najlepszą jakość korzystania z naszego serwisu.
+    <button id="accept-cookies-pl" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
+  </div>
+  <div lang="de">
+    Diese Website verwendet Cookies, um Ihnen das beste Nutzererlebnis zu bieten.
+    <button id="accept-cookies-de" style="margin-left: 1rem; padding: 0.4rem 1rem;">Ich stimme zu</button>
+  </div>
 </div>
 
-<style>
-    .cookie-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        color: #fff;
-        padding: 15px;
-        text-align: center;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        z-index: 1000;
-    }
-    .cookie-bar p {
-        margin: 0 20px 0 0;
-        font-size: 0.9em;
-    }
-    .cookie-bar button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 0.9em;
-        margin: 5px;
-    }
-    .cookie-bar button:hover {
-        background-color: #45a049;
-    }
-    /* Hide specific language content if not active */
-    .cookie-bar strong:not([lang="pl"]),
-    .cookie-bar button:not([lang="pl"]) {
-        display: none;
-    }
-    body[lang="de"] .cookie-bar strong:not([lang="de"]),
-    body[lang="de"] .cookie-bar button:not([lang="de"]) {
-        display: none;
-    }
-    body[lang="de"] .cookie-bar strong[lang="de"],
-    body[lang="de"] .cookie-bar button[lang="de"] {
-        display: inline; /* or block, as appropriate */
-    }
-</style>
-
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const acceptCookiesButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
-        const cookieBar = document.querySelector('.cookie-bar');
+(function() {
+  const bar = document.querySelector('.cookie-bar');
+  const acceptButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
 
-        if (localStorage.getItem('cookiesAccepted')) {
-            cookieBar.style.display = 'none';
-        }
+  if (localStorage.getItem('cookiesAccepted')) {
+    bar.style.display = 'none';
+    return;
+  }
 
-        acceptCookiesButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                localStorage.setItem('cookiesAccepted', 'true');
-                cookieBar.style.display = 'none';
-            });
-        });
-
-        // Simple language detection for demonstration
-        const userLang = navigator.language || navigator.userLanguage;
-        const body = document.body;
-        if (userLang.startsWith('de')) {
-            body.setAttribute('lang', 'de');
-        } else {
-            body.setAttribute('lang', 'pl'); // Default to PL
-        }
+  acceptButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      localStorage.setItem('cookiesAccepted', 'true');
+      bar.style.display = 'none';
     });
+  });
+
+  const userLang = navigator.language || navigator.userLanguage;
+  const langPl = document.querySelector('[lang="pl"]');
+  const langDe = document.querySelector('[lang="de"]');
+
+  if (userLang.startsWith('de')) {
+    langPl.style.display = 'none';
+    langDe.style.display = 'block';
+  } else {
+    langPl.style.display = 'block';
+    langDe.style.display = 'none';
+  }
+})();
 </script>
