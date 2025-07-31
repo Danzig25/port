@@ -2,14 +2,20 @@ function initCookieBar() {
   const cookieBar = document.getElementById('cookie-bar');
   const acceptButton = document.getElementById('accept-cookies');
   const localStorageKey = 'cookiesAccepted';
+  const cookieName = 'cookiesAccepted';
 
   if (!cookieBar || !acceptButton) {
     return setTimeout(initCookieBar, 100);
   }
 
-  // Funkcja do wykrywania Brave i podobnych przeglądarek
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
   async function isPrivacyBrowser() {
-    // Wykrywanie Brave
+    // 1. Direct Brave detection
     if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
       try {
         const isBrave = await navigator.brave.isBrave();
@@ -17,40 +23,42 @@ function initCookieBar() {
           return true;
         }
       } catch (e) {
-        console.warn('Błąd wykrywania Brave:', e);
+        console.warn('Error during Brave detection:', e);
       }
     }
+
+    // 2. User-Agent string check (as an additional check for Brave)
+    if (navigator.userAgent.includes('Brave')) {
+      return true;
+    }
     
-    // Prosta heurystyka dla innych przeglądarek z silnymi blokadami (jak Mulvad)
-    // Sprawdza, czy localStorage jest dostępny i czy da się w nim zapisać dane
+    // 3. Heuristic for browsers that block storage (like Mulvad)
     try {
-        localStorage.setItem('test', 'test');
-        localStorage.removeItem('test');
+      localStorage.setItem('test', 'test');
+      localStorage.removeItem('test');
     } catch (e) {
-        // Jeśli localStorage jest niedostępny lub blokowany, uznajemy przeglądarkę za "prywatną"
-        return true;
+      // If we can't use localStorage, assume it's a privacy-focused browser
+      console.warn('Storage blocked, assuming privacy browser:', e);
+      return true;
     }
 
     return false;
   }
 
-  // Uruchomienie logiki po sprawdzeniu przeglądarki
   isPrivacyBrowser().then((isPrivate) => {
     if (isPrivate) {
-      // Jeśli przeglądarka jest "prywatna", ukrywamy pasek całkowicie
       cookieBar.style.display = 'none';
       return;
     }
 
-    // Normalna logika dla pozostałych przeglądarek
+    // Normal logic for other browsers
     let isAccepted = false;
     try {
       isAccepted =
         localStorage.getItem(localStorageKey) === 'true' ||
-        document.cookie.includes('cookiesAccepted=true') ||
-        sessionStorage.getItem('cookiesAcceptedSession') === 'true';
+        getCookie(cookieName) === 'true';
     } catch (e) {
-      console.warn('Storage niedostępny:', e);
+      console.warn('Storage unavailable:', e);
     }
 
     if (isAccepted) {
@@ -64,12 +72,11 @@ function initCookieBar() {
       try {
         localStorage.setItem(localStorageKey, 'true');
       } catch (e) {}
+
       try {
-        document.cookie = "cookiesAccepted=true; path=/; max-age=31536000";
+        document.cookie = `${cookieName}=true; path=/; max-age=31536000; samesite=Lax`;
       } catch (e) {}
-      try {
-        sessionStorage.setItem('cookiesAcceptedSession', 'true');
-      } catch (e) {}
+
       cookieBar.style.display = 'none';
     });
   });
