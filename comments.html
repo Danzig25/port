@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -36,5 +35,11 @@
       <p><strong>DE:</strong> Wir arbeiten an der Möglichkeit, Kommentare in einem offenen Forum zu ermöglichen.</p>
     </div>
   </main>
+
+  <script>
+    fetch("/partials/cookiebar.html")
+      .then(res => res.text())
+      .then(html => document.body.insertAdjacentHTML("beforeend", html));
+  </script>
 </body>
 </html>
