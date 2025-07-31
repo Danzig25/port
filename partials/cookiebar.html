@@ -1,19 +1,84 @@
-<div id="cookie-bar" style="position: fixed; bottom: 0; width: 100%; background: #f8f8f8; color: #000; font-family: Georgia, serif; font-size: 14px; padding: 12px 20px; box-shadow: 0 -1px 5px rgba(0,0,0,0.1); display: none; justify-content: space-between; align-items: center; z-index: 999;">
-  <div>
-    Korzystamy z plików cookies, aby poprawić działanie strony. /
-    Wir verwenden Cookies, um die Funktionalität dieser Website zu verbessern.
-  </div>
-  <button id="accept-cookies" style="background: black; color: white; border: none; padding: 8px 16px; margin-left: 20px; cursor: pointer;">
-    Akceptuję / Ich stimme zu
-  </button>
+<div class="cookie-bar">
+    <p>
+        <strong lang="pl">Używamy plików cookie, aby zapewnić najlepszą jakość korzystania z naszej witryny.</strong>
+        <strong lang="de">Wir verwenden Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten.</strong>
+    </p>
+    <button id="accept-cookies-pl" lang="pl">Akceptuję</button>
+    <button id="accept-cookies-de" lang="de">Ich akzeptiere</button>
 </div>
 
+<style>
+    .cookie-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        z-index: 1000;
+    }
+    .cookie-bar p {
+        margin: 0 20px 0 0;
+        font-size: 0.9em;
+    }
+    .cookie-bar button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin: 5px;
+    }
+    .cookie-bar button:hover {
+        background-color: #45a049;
+    }
+    /* Hide specific language content if not active */
+    .cookie-bar strong:not([lang="pl"]),
+    .cookie-bar button:not([lang="pl"]) {
+        display: none;
+    }
+    body[lang="de"] .cookie-bar strong:not([lang="de"]),
+    body[lang="de"] .cookie-bar button:not([lang="de"]) {
+        display: none;
+    }
+    body[lang="de"] .cookie-bar strong[lang="de"],
+    body[lang="de"] .cookie-bar button[lang="de"] {
+        display: inline; /* or block, as appropriate */
+    }
+</style>
+
 <script>
-  if (!localStorage.getItem("cookieConsent")) {
-    document.getElementById("cookie-bar").style.display = "flex";
-  }
-  document.getElementById("accept-cookies").addEventListener("click", function () {
-    localStorage.setItem("cookieConsent", "true");
-    document.getElementById("cookie-bar").remove();
-  });
+    document.addEventListener("DOMContentLoaded", function() {
+        const acceptCookiesButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
+        const cookieBar = document.querySelector('.cookie-bar');
+
+        if (localStorage.getItem('cookiesAccepted')) {
+            cookieBar.style.display = 'none';
+        }
+
+        acceptCookiesButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieBar.style.display = 'none';
+            });
+        });
+
+        // Simple language detection for demonstration
+        const userLang = navigator.language || navigator.userLanguage;
+        const body = document.body;
+        if (userLang.startsWith('de')) {
+            body.setAttribute('lang', 'de');
+        } else {
+            body.setAttribute('lang', 'pl'); // Default to PL
+        }
+    });
 </script>
