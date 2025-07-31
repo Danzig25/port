@@ -8,10 +8,14 @@ function initCookieBar() {
     }
 
     let isAccepted = false;
+
     try {
-        isAccepted = localStorage.getItem(localStorageKey) === 'true';
+        isAccepted =
+            localStorage.getItem(localStorageKey) === 'true' ||
+            document.cookie.includes('cookiesAccepted=true') ||
+            sessionStorage.getItem('cookiesAcceptedSession') === 'true';
     } catch (e) {
-        console.warn('Brak dostępu do localStorage:', e);
+        console.warn('Storage niedostępny:', e);
     }
 
     if (isAccepted) {
@@ -25,8 +29,19 @@ function initCookieBar() {
         try {
             localStorage.setItem(localStorageKey, 'true');
         } catch (e) {
-            console.warn('Nie można zapisać cookies:', e);
+            console.warn('Nie można zapisać do localStorage:', e);
         }
+        try {
+            document.cookie = "cookiesAccepted=true; path=/; max-age=31536000";
+        } catch (e) {
+            console.warn('Nie można ustawić cookies:', e);
+        }
+        try {
+            sessionStorage.setItem('cookiesAcceptedSession', 'true');
+        } catch (e) {
+            console.warn('Nie można zapisać do sessionStorage:', e);
+        }
+
         cookieBar.style.display = 'none';
     });
 }
