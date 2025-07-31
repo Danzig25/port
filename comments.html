@@ -38,12 +38,12 @@
   </main>
 
   <script>
-    fetch('partials/cookiebar.html')
+    fetch('/partials/cookiebar.html')
       .then(res => res.text())
       .then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
         const script = document.createElement('script');
-        script.src = 'partials/cookiebar.js';
+        script.src = '/partials/cookiebar.js';
         script.onload = () => {
           if (typeof initCookieBar === 'function') initCookieBar();
         };
