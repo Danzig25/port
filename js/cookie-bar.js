@@ -15,30 +15,19 @@ function initCookieBar() {
   }
 
   async function isPrivacyBrowser() {
-    // 1. Direct Brave detection
-    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
-      try {
-        const isBrave = await navigator.brave.isBrave();
-        if (isBrave) {
-          return true;
-        }
-      } catch (e) {
-        console.warn('Error during Brave detection:', e);
-      }
-    }
-
-    // 2. User-Agent string check (as an additional check for Brave)
-    if (navigator.userAgent.includes('Brave')) {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isBraveUA = userAgent.includes('brave');
+    const isBraveVendor = navigator.vendor === 'Brave Software, Inc.';
+    if (isBraveUA || isBraveVendor) {
       return true;
     }
-    
-    // 3. Heuristic for browsers that block storage (like Mulvad)
+
+    // Heurystyka dla przeglądarek takich jak Mullvad
     try {
       localStorage.setItem('test', 'test');
       localStorage.removeItem('test');
     } catch (e) {
-      // If we can't use localStorage, assume it's a privacy-focused browser
-      console.warn('Storage blocked, assuming privacy browser:', e);
+      console.warn('localStorage blocked, assuming privacy browser:', e);
       return true;
     }
 
@@ -47,11 +36,11 @@ function initCookieBar() {
 
   isPrivacyBrowser().then((isPrivate) => {
     if (isPrivate) {
+      console.log('Prywatna przeglądarka wykryta – pasek cookies NIE zostanie pokazany.');
       cookieBar.style.display = 'none';
       return;
     }
 
-    // Normal logic for other browsers
     let isAccepted = false;
     try {
       isAccepted =
@@ -83,3 +72,4 @@ function initCookieBar() {
 }
 
 document.addEventListener("DOMContentLoaded", initCookieBar);
+
