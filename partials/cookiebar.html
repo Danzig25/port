@@ -1,58 +1,64 @@
-<div class="cookie-bar" style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #f1f1f1;
-  color: #000;
-  padding: 1rem;
-  font-family: sans-serif;
-  font-size: 0.95rem;
-  box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
-  z-index: 9999;
-  text-align: center;
-">
-  <div lang="pl">
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie Test</title>
+  <style>
+    .cookie-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f1f1f1;
+      color: #000;
+      padding: 1rem;
+      font-family: sans-serif;
+      font-size: 0.95rem;
+      box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+      z-index: 9999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cookie-bar" id="cookieBar">
     Ta strona używa ciasteczek, aby zapewnić najlepszą jakość korzystania z naszego serwisu.
-    <button id="accept-cookies-pl" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
+    <button id="acceptCookieBtn" style="margin-left: 1rem; padding: 0.4rem 1rem;">Akceptuję</button>
   </div>
-  <div lang="de">
-    Diese Website verwendet Cookies, um Ihnen das beste Nutzererlebnis zu bieten.
-    <button id="accept-cookies-de" style="margin-left: 1rem; padding: 0.4rem 1rem;">Ich stimme zu</button>
-  </div>
-</div>
 
-<script>
-// POCZEKAJ aż element faktycznie będzie wczytany
-function initCookieBar() {
-  const bar = document.querySelector('.cookie-bar');
-  if (!bar) return setTimeout(initCookieBar, 50); // próbuj ponownie co 50ms
+  <script>
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
-  const acceptButtons = document.querySelectorAll('#accept-cookies-pl, #accept-cookies-de');
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
 
-  if (localStorage.getItem('cookiesAccepted')) {
-    bar.style.display = 'none';
-    return;
-  }
+    window.addEventListener("load", () => {
+      const bar = document.getElementById("cookieBar");
+      const button = document.getElementById("acceptCookieBtn");
 
-  acceptButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      localStorage.setItem('cookiesAccepted', 'true');
-      bar.style.display = 'none';
+      if (getCookie("cookiesAccepted") === "true") {
+        bar.remove();
+        return;
+      }
+
+      button.addEventListener("click", () => {
+        setCookie("cookiesAccepted", "true", 365); // zapisane na rok
+        bar.remove();
+      });
     });
-  });
+  </script>
 
-  const userLang = navigator.language || navigator.userLanguage;
-  const langPl = document.querySelector('[lang="pl"]');
-  const langDe = document.querySelector('[lang="de"]');
-
-  if (userLang.startsWith('de')) {
-    langPl.style.display = 'none';
-    langDe.style.display = 'block';
-  } else {
-    langPl.style.display = 'block';
-    langDe.style.display = 'none';
-  }
-}
-initCookieBar();
-</script>
+</body>
+</html>
