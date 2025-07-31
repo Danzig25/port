@@ -39,7 +39,4 @@
   <script>
     fetch("/partials/cookiebar.html")
       .then(res => res.text())
-      .then(html => document.body.insertAdjacentHTML("beforeend", html));
-  </script>
-</body>
-</html>
+      .then(html => document.body.insertAdjacentHTML("beforeend", html))
