@@ -1,4 +1,3 @@
-// cookie-bar_smart.js — dynamiczny pasek cookies, pamięta kliknięcie w normalnych przeglądarkach
 
 document.addEventListener('DOMContentLoaded', async () => {
   const isPrivacyBrowser = async () => {
@@ -25,36 +24,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isPrivate = await isPrivacyBrowser();
 
   if (isPrivate) {
-    console.log('🔒 Prywatna przeglądarka wykryta – nie pokazuję paska cookies');
+    console.log('🔒 Prywatna przeglądarka – usuwam pasek cookies');
     return;
   }
 
-  // Sprawdź, czy użytkownik już zaakceptował
-  if (localStorage.getItem('cookieAccepted') === '1') {
-    console.log('✅ Cookie bar już zaakceptowany wcześniej');
-    return;
+  if (!localStorage.getItem('cookies-accepted')) {
+    const bar = document.createElement('div');
+    bar.className = 'cookie-bar';
+
+    bar.innerHTML = \`
+      Ta strona używa plików cookie, by zapewnić najlepsze wrażenia.
+      <button id="accept-cookies">Akceptuję</button>
+    \`;
+
+    document.body.appendChild(bar);
+
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+      localStorage.setItem('cookies-accepted', 'true');
+      bar.remove();
+    });
   }
-
-  // Tworzenie paska cookies
-  const bar = document.createElement('div');
-  bar.id = 'cookie-bar';
-  bar.style = 'position:fixed;bottom:0;left:0;right:0;background:#333;color:#fff;padding:10px;text-align:center;font-family:sans-serif;z-index:9999;';
-  bar.innerHTML = `
-    This site uses cookies for basic functionality only.
-    <button id="cookie-ok" style="margin-left:10px;padding:5px 10px;">OK</button>
-  `;
-
-  document.body.appendChild(bar);
-
-  const okBtn = document.getElementById('cookie-ok');
-  okBtn.addEventListener('click', () => {
-    try {
-      localStorage.setItem('cookieAccepted', '1');
-    } catch (_) {}
-    bar.style.opacity = '0';
-    bar.style.visibility = 'hidden';
-    bar.style.transition = 'opacity 0.3s ease';
-  });
-
-  console.log('🍪 Pasek cookies pokazany – użytkownik jeszcze nie zaakceptował');
 });
