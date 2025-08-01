@@ -37,11 +37,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Tworzenie paska cookies
   const bar = document.createElement('div');
-  bar.id = 'cookie-bar';
-  bar.style = 'position:fixed;bottom:0;left:0;right:0;background:#333;color:#fff;padding:10px;text-align:center;font-family:sans-serif;z-index:9999;';
+  // Zmieniono na dodanie klasy zamiast inline stylów
+  bar.className = 'cookie-bar';
+  bar.id = 'cookie-bar'; // Zachowanie ID dla kompatybilności
   bar.innerHTML = `
     This site uses cookies for basic functionality only.
-    <button id="cookie-ok" style="margin-left:10px;padding:5px 10px;">OK</button>
+    <button id="cookie-ok">OK</button>
   `;
 
   document.body.appendChild(bar);
