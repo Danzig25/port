@@ -9,7 +9,6 @@
         <meta content="Opis artykułu na stronie sekcji." name="description"/>
         <link href="https://fonts.googleapis.com" rel="preconnect"/>
         <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-        <!-- All font imports from index.html are added here for consistency -->
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&amp;display=swap" rel="stylesheet"/>
@@ -24,7 +23,56 @@
         <!-- Existing CSS files -->
         <link href="css/theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/section.css" rel="stylesheet" type="text/css"/>
-        <style>.article-actions { display: flex;  /* Use flexbox for layout */ justify-content: center;  /* Center items horizontally */ flex-wrap: wrap;  /* Allow items to wrap on smaller screens */ gap: 10px;  /* Add some space between buttons */ } .article-actions a, .article-actions button { color: inherit; text-decoration: none;  /* Explicitly set font-family for consistency */ font-family: 'Merriweather', serif; font-weight: 400;  /* Ensure consistent weight */ /* Add padding and border similar to buttons if needed, or rely on existing CSS */ padding: 8px 15px;  /* Example padding to make links look more like buttons */ border: 1px solid #ccc;  /* Example border */ border-radius: 5px;  /* Example rounded corners */ background-color: #f0f0f0;  /* Example background */ cursor: pointer; display: inline-block;  /* Treat anchors like blocks for padding/border */ } /* Adjust button specific styles if necessary for finer control */.article-actions button { /* Any specific button overrides can go here if needed */ }</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia&display=swap">
+        <style>
+            .article-sources {
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #ccc;
+            }
+            .article-sources p {
+                font-family: 'Merriweather', serif;
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            .article-sources ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            .article-sources li {
+                margin-bottom: 8px;
+                scroll-margin-top: 20px; /* Zapewnia, że element nie jest zasłonięty przez nagłówek po kliknięciu linku */
+            }
+            .article-sources a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            .article-sources a:hover {
+                text-decoration: underline;
+            }
+            .article-body a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            /* Przywrócenie oryginalnych stylów dla przycisków w article-actions */
+            .article-actions a, .article-actions button {
+                color: inherit; /* Użyj dziedziczonego koloru */
+                text-decoration: none;
+                font-family: inherit; /* Użyj dziedziczonej czcionki */
+                font-weight: inherit; /* Użyj dziedziczonej wagi czcionki */
+                padding: 8px 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f0f0f0;
+                cursor: pointer;
+                display: inline-block;
+            }
+            .article-actions button {
+                /* Możesz dodać specyficzne style dla przycisków, jeśli są inne niż dla linków */
+            }
+        </style>
         <link href="css/cookie-bar.css" rel="stylesheet"/>
     </head>
     <body>
@@ -121,25 +169,31 @@
                 <img alt="Duży obraz artykułu" class="article-main-image" src="https://i.postimg.cc/RFK0VMnm/danzig-rat.jpg"/>
                 <p class="image-caption">Foto: Le Sep</p>
                 <div class="article-body">
-                    <p style="">W jednym z niemieckich miast, Duisburgu, władze przeprowadziły szeroko zakrojoną akcję w potężnym wieżowcu mieszkalnym, pieszczotliwie zwanym &quot;Białym olbrzymem&quot; Kontrola ujawniła dziesiątki przypadków oszustw socjalnych, które, jak się okazało, były zorganizowane na dużą skalę przez grupy przestępcze [1]. Te struktury mafijne wykorzystywały lukę w systemie, sprowadzając do Niemiec obywateli Rumunii i Bułgarii, którzy, formalnie zameldowani pod adresem &quot;olbrzyma&quot;, stanowili maszynkę do wyłudzania świadczeń socjalnych. Za każdy meldunek i załatwienie formalności, gangi pobierały haracz. Ten system, choć dobrze znany służbom, przez lata pozostawał bezkarny, a oszustwa narastały do gigantycznych rozmiarów.</p>
+                    <p style="">W jednym z niemieckich miast, Duisburgu, władze przeprowadziły szeroko zakrojoną akcję w potężnym wieżowcu mieszkalnym, pieszczotliwie zwanym &quot;Białym olbrzymem&quot; Kontrola ujawniła dziesiątki przypadków oszustw socjalnych, które, jak się okazało, były zorganizowane na dużą skalę przez grupy przestępcze <a href="#source-1">[1]</a>. Te struktury mafijne wykorzystywały lukę w systemie, sprowadzając do Niemiec obywateli Rumunii i Bułgarii, którzy, formalnie zameldowani pod adresem &quot;olbrzyma&quot;, stanowili maszynkę do wyłudzania świadczeń socjalnych. Za każdy meldunek i załatwienie formalności, gangi pobierały haracz. Ten system, choć dobrze znany służbom, przez lata pozostawał bezkarny, a oszustwa narastały do gigantycznych rozmiarów.</p>
                     <p style=""><b>Polak potrafi,  nie będzie Niemiec pluł nam w twarz.</b> 
-Polska nie odstaje od Niemiec w tych doświadczeniach. Na naszych łamach pisaliśmy już w artykule &bdquo;Bruderferajna Wileńska &ndash; Gdyńskie NGO &apos;O&apos;. Kazus prawno-historyczny&rdquo; <a href="archiwum/prawo26lipca25.html">Bruderferajna Wileńska – Gdyńskie NGO</a>
- [2] o prezesie gdyńskiego NGO, które, rzekomo niosąc pomoc, zbierało haracze od cudzoziemców zatrudnionych w projektach finansowanych przez ONZ (UNHCR). Mamy więc do czynienia z tym samym mechanizmem &ndash; wykorzystaniem trudnej sytuacji migrantów i systemów wsparcia do czerpania zysków przez zorganizowane grupy.&nbsp;</p>
+Polska nie odstaje od Niemiec w tych doświadczeniach. Na naszych łamach pisaliśmy już w artykule &bdquo;Bruderferajna Wileńska &ndash; Gdyńskie NGO &apos;O&apos;. Kazus prawno-historyczny&rdquo; <a href="#source-2">[2]</a> o prezesie gdyńskiego NGO, które, rzekomo niosąc pomoc, zbierało haracze od cudzoziemców zatrudnionych w projektach finansowanych przez ONZ (UNHCR). Mamy więc do czynienia z tym samym mechanizmem &ndash; wykorzystaniem trudnej sytuacji migrantów i systemów wsparcia do czerpania zysków przez zorganizowane grupy.&nbsp;</p>
                     <p style="">W artykule Frankfurter Allgemeine Zeitung (FAZ) wspomina się o Rumunach i Bułgarach, którzy stali się narzędziem w rękach gangów. W polskiej rzeczywistości ich odpowiednikami są obywatele Ukrainy i Białorusi. O ile tematyka ukraińska w kontekście wyłudzeń dotacji w pewnym stopniu już się spowszedniała, Białorusini stanowią mniej liczną, ale równie podatną na oszustwa grupę. Co do zasady, metody przekrętów są podobne.
-Warto tu przypomnieć o skali oszustw w tzw. programie &bdquo;40 zł+&rdquo;, w ramach którego właściciele mieszkań, w zamian za zakwaterowanie i wyżywienie obywateli Ukrainy, otrzymywali od państwa 40 zł za dobę. Jak słusznie zauważono w artykule z FAZ &ndash; im więcej państwo przeznacza dotacji na pomoc dla cudzoziemców, tym bardziej stają się oni atrakcyjni dla oszustów. Państwo, zbyt dobrze zaznajomione z tym problemem, zlikwidowało program na wniosek MSWiA w ramach &bdquo;uszczelnienia&rdquo;.
+Warto tu przypomnieć o skali oszustw w tzw. programie &bdquo;40 zł+&rdquo; w ramach którego właściciele mieszkań, w zamian za zakwaterowanie i wyżywienie obywateli Ukrainy, otrzymywali od państwa 40 zł za dobę. Jak słusznie zauważono w artykule z FAZ &ndash; im więcej państwo przeznacza dotacji na pomoc dla cudzoziemców, tym bardziej stają się oni atrakcyjni dla oszustów. Państwo, zbyt dobrze zaznajomione z tym problemem, zlikwidowało program na wniosek MSWiA w ramach &bdquo;uszczelnienia&rdquo;.
 Jednak obywatele Ukrainy i Białorusi stają się już mniej atrakcyjni jako &bdquo;narzędzia&rdquo; dla gangów. Wielu z nich ma w Polsce znajomych i krewnych, którzy mieszkają tu od lat i są w stanie pomóc im zgłosić oszustwa do prokuratury, Państwowej Inspekcji Pracy lub innych organów.&nbsp;</p>
                     <p style="">Ostatnio takim &bdquo;dobrym&rdquo; narzędziem stali się obywatele Kolumbii. Początek był niewinny: agencje pracy &bdquo;widma&rdquo; ściągały Kolumbijczyków do Polski, wykorzystując reżim bezwizowy. Nieszczęśni migranci żyli w przekonaniu, że agencja złożyła za nich wniosek o pozwolenie na pracę i pobyt. Na dowód otrzymywali żółty papier z Poczty Polskiej &ndash; zwrotne potwierdzenie odbioru. Oczywiście, żadnych umów ani wniosków agencje te nie składały. Mimo licznych zgłoszeń ze strony organizacji pozarządowych, problem ten pozostaje bezskutecznie ignorowany przez organy państwowe.</p>
                     <p style="">Lokalna prasa pomorska, zajęła się tym tematem tylko raz, kiedy na początku lutego doszło do masowej bójki z udziałem obywateli Kolumbii w Słupsku. Nikogo jednak nie zainteresowało, co tak naprawdę robią oni w Słupsku. &bdquo;O, migranci zarobkowi&rdquo; &ndash; padała prosta odpowiedź. Niestety, w dużej mierze osoby te podpadają pod definicję ofiar handlu ludźmi.
-Zamiast nagłaśniać te masowe oszustwa i demaskować proceder wykorzystywania migrantów, polskie media często skupiają się na incydentach, które budzą silne emocje. Prasa po prezydenckich wyborach wyraźnie nasiliła narrację o przestępstwach, w które rzekomo uwikłani są obywatele Kolumbii. Pojawiły się doniesienia o bójkach czy przestępstwach z użyciem noża, a także o aresztowaniach Kolumbijczyków oskarżonych o handel ludźmi. Taka jednostronna perspektywa, skupiająca się na wyizolowanych przypadkach kryminalnych, skutecznie odwraca uwagę od systemowego problemu ofiar handlu ludźmi, co pozwala agencjom pracy i zorganizowanym grupom na dalsze bezkarne działanie. Ten schemat narracyjny dotyczy nie tylko Kolumbijczyków, ale i innych narodowości, na przykład Wenezuelczyków, o czym świadczył post byłego premiera Mateusza Morawieckiego na Facebooku [3], gdzie tragedia jednej osoby została użyta do wzbudzenia strachu przed całą grupą migrantów.&nbsp;</p>
-                    <p style="">Najgorsze jest to, że znane polskie marki wykorzystują ofiary tego procederu za pośrednictwem agencji pracy, co &ndash; po rezultatach ostatnich wyborów prezydenckich &ndash; z pewnością mogłoby zwiększyć ich sprzedaż. Cała polska polityka migracyjna w pigułce jest zawarta w spocie wyborczym Prawa i Sprawiedliwości z 2018 roku, który, jak wskazywała organizacja &quot;Otwarta Rzeczpospolita&quot; [4], miał na celu straszenie społeczeństwa uchodźcami i migrantami, przedstawiając ich jako źródło zagrożenia i przestępczości. Ten sposób myślenia, podsycający lęki i uprzedzenia, wciąż dominuje w debacie publicznej. Czy to &bdquo;Antyniemiecki folklor w Gdańsku&rdquo; [5], gdzie zarabiamy na migrantach i turystach (i to nie zawsze w uczciwy sposób), by jednocześnie grać na patriotycznych nutach?</p>
-                    <p style="">[1] https://www.faz.net/aktuell/politik/inland/weisse-riesen-in-duisburg-sozialbetrug-laesst-sich-nicht-wegsprengen-110616624.html] [2] https://danziger.report/archiwum/archiwum prawo_26 lipca 2025.html
-[3] https://www.facebook.com/MorawieckiPL/posts/tragiczny-fina%C5%82-bestialskiego-ataku-emigranta-z-wenezueli-na-24-letni%C4%85-klaudi%C4%99-b/1270879174403137
-[4] https://www.otwarta.org/antyimigrancki-spot-pis/
-[5] https://wpolityce.pl/spoleczenstwo/210075-antyniemiecki-folklor-w-gdansku-niemcom-przeszkadza-rota-wybrzmiewajaca-z-ratuszowej-wiezy&nbsp;</p>
+Zamiast nagłaśniać te masowe oszustwa i demaskować proceder wykorzystywania migrantów, polskie media często skupiają się na incydentach, które budzą silne emocje. Prasa po prezydenckich wyborach wyraźnie nasiliła narrację o przestępstwach, w które rzekomo uwikłani są obywatele Kolumbii. Pojawiły się doniesienia o bójkach czy przestępstwach z użyciem noża, a także o aresztowaniach Kolumbijczyków oskarżonych o handel ludźmi. Taka jednostronna perspektywa, skupiająca się na wyizolowanych przypadkach kryminalnych, skutecznie odwraca uwagę od systemowego problemu ofiar handlu ludźmi, co pozwala agencjom pracy i zorganizowanym grupom na dalsze bezkarne działanie. Ten schemat narracyjny dotyczy nie tylko Kolumbijczyków, ale i innych narodowości, na przykład Wenezuelczyków, o czym świadczył post byłego premiera Mateusza Morawieckiego na Facebooku <a href="#source-3">[3]</a>, gdzie tragedia jednej osoby została użyta do wzbudzenia strachu przed całą grupą migrantów.&nbsp;</p>
+                    <p style="">Najgorsze jest to, że znane polskie marki wykorzystują ofiary tego procederu za pośrednictwem agencji pracy, co &ndash; po rezultatach ostatnich wyborów prezydenckich &ndash; z pewnością mogłoby zwiększyć ich sprzedaż. Cała polska polityka migracyjna w pigułce jest zawarta w spocie wyborczym Prawa i Sprawiedliwości z 2018 roku, który, jak wskazywała organizacja &quot;Otwarta Rzeczpospolita&quot; <a href="#source-4">[4]</a>, miał na celu straszenie społeczeństwa uchodźcami i migrantami, przedstawiając ich jako źródło zagrożenia i przestępczości. Ten sposób myślenia, podsycający lęki i uprzedzenia, wciąż dominuje w debacie publicznej. Czy to &bdquo;Antyniemiecki folklor w Gdańsku&rdquo; <a href="#source-5">[5]</a>, gdzie zarabiamy na migrantach i turystach (i to nie zawsze w uczciwy sposób), by jednocześnie grać na patriotycznych nutach?</p>
+                    <p style=""></p>
                     <p style=""></p>
                 </div>
-                <div class="article-actions"><a href="index.html">
-      Start page </a><a href="comments.html">
+                <div class="article-sources">
+                    <p>Źródła:</p>
+                    <ul>
+                        <li id="source-1">[1] <a href="https://www.faz.net/aktuell/politik/inland/weisse-riesen-in-duisburg-sozialbetrug-laesst-sich-nicht-wegsprengen-110616624.html" target="_blank">FAZ – „Sozialbetrug lässt sich nicht wegsprengen”</a></li>
+                        <li id="source-2">[2] <a href="https://danziger.report/archiwum/prawo26lipca25.html" target="_blank">Danziger Report – „Bruderferajna Wileńska”</a></li>
+                        <li id="source-3">[3] <a href="https://www.facebook.com/MorawieckiPL/posts/tragiczny-fina%C5%82-bestialskiego-ataku-emigranta-z-wenezueli-na-24-letni%C4%85-klaudi%C4%99-b/1270879174403137" target="_blank">Post M. Morawieckiego (Facebook)</a></li>
+                        <li id="source-4">[4] <a href="https://www.otwarta.org/antyimigrancki-spot-pis/" target="_blank">Fundacja Otwarta</a></li>
+                        <li id="source-5">[5] <a href="https://wpolityce.pl/spoleczenstwo/210075-antyniemiecki-folklor-w-gdansku-niemcom-przeszkadza-rota-wybrzmiewajaca-z-ratuszowej-wiezy" target="_blank">wPolityce – „Antyniemiecki folklor w Gdańsku”</a></li>
+                    </ul>
+                </div>
+                <div class="article-actions"><a href="index.html" role="button">
+      Start page </a><a href="comments.html" role="button">
       Comment </a>
                     <button onclick="navigator.share({url: window.location.href})">
                         Share
@@ -218,3 +272,4 @@ Zamiast nagłaśniać te masowe oszustwa i demaskować proceder wykorzystywania 
         <script src="js/cookie-bar_smart.js"></script>
     </script>
 </body>
+</html>
