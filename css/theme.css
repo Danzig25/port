@@ -520,3 +520,11 @@ nav.main-nav ul li {
     font-weight: 400;
     appearance: none;
 }
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1rem;
+    text-align: center;
+    word-break: break-word;
+  }
+}
