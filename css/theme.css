@@ -37,7 +37,7 @@ header {
 }
 
 header h1 {
-  font-size: 20px;
+  font-size: 16px;
   font-family: 'Libre Baskerville', serif; /* Updated from Playfair Display SC */
   color: #000;
   letter-spacing: 0.05em;
@@ -382,7 +382,7 @@ nav.main-nav ul li {
 
   /* Dostosowanie nagłówka i logo na mobile */
   header h1 {
-    font-size: 1.8em;
+    font-size: 1.5rem;
   }
   header h1 img {
     max-height: 80px;
@@ -441,7 +441,7 @@ nav.main-nav ul li {
 
 @media (max-width: 600px) {
   header h1 {
-    font-size: 1.3rem; /* Further reduced font size for smaller mobile screens */
+    font-size: 0.8rem; /* Further reduced font size for smaller mobile screens */
   }
   header h1 img {
     max-height: 36px; /* Further reduced max-height for smaller mobile screens */
@@ -450,7 +450,7 @@ nav.main-nav ul li {
 
 @media (max-width: 480px) {
   header h1 {
-    font-size: 1rem; /* ~16px – minimal, clean for phones */
+    font-size: 0.8rem; /* ~16px – minimal, clean for phones */
   }
 }
 
@@ -519,12 +519,4 @@ nav.main-nav ul li {
     font-family: inherit;
     font-weight: 400;
     appearance: none;
-}
-
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1rem;
-    text-align: center;
-    word-break: break-word;
-  }
 }
