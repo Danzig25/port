@@ -1,84 +1,52 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <title>Kontakt | Danziger Reporter</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 0 20px;
-      background: #fdfdfd;
-      color: #222;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin: 20px 0 10px;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      font-family: inherit;
-      font-size: 16px;
-      border: 1px solid #ccc;
-    }
-    textarea {
-      height: 160px;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 30px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #000;
-      color: #fff;
-      border: none;
-    }
-  </style>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-</head>
-<body>
-
-  <h1>Skontaktuj się z redakcją</h1>
-
-  <form id="kontakt-form">
-    <label>Imię i nazwisko:
-      <input type="text" name="name" required>
-    </label>
-
-    <label>Adres e-mail:
-      <input type="email" name="email" required>
-    </label>
-
-    <label>Wiadomość:
-      <textarea name="message" required></textarea>
-    </label>
-
-    <button type="submit">Wyślij</button>
-  </form>
-
-  <script>
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Contact | Danziger Reporter</title>         
+        <style>body { font-family: Georgia, serif; max-width: 600px; margin: 60px auto; padding: 0 20px; background: #fdfdfd; color: #222; } h1 { font-size: 28px; margin-bottom: 20px; font-family: 'UnifrakturMaguntia', cursive; } label { display: block; margin: 20px 0 10px; font-weight: bold; } input, textarea { width: 100%; padding: 10px; font-family: inherit; font-size: 16px; border: 1px solid #ccc; } textarea { height: 160px; } button { margin-top: 20px; padding: 10px 30px; font-size: 16px; font-weight: bold; cursor: pointer; background: #000; color: #fff; border: none; }</style>         
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>         
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap">
+    </head>     
+    <body> 
+        <h1>Contact the Danziger Reporter</h1> 
+        <form id="contact-form"> 
+            <label style="font-family: 'Old Standard TT', serif; font-size: 18px;">Name:
+                <input type="text" name="name" required> 
+            </label>             
+            <label style="font-family: 'Old Standard TT', serif; font-size: 18px;">Email address:
+                <input type="email" name="email" required> 
+            </label>             
+            <label style="font-family: 'Old Standard TT', serif; font-size: 18px;">Message:
+                <textarea name="message" required style="font-family: 'Old Standard TT', serif; font-size: 18px;"></textarea> 
+            </label>             
+            <button type="submit">Send</button>             
+        </form>         
+        <script>
+    // Initialize Email.js with your public key.
+    // Replace "PGsn7ZkHeptD5mWTv" with your actual Email.js user ID.
     (function(){
       emailjs.init("PGsn7ZkHeptD5mWTv");
     })();
 
-    document.getElementById('kontakt-form').addEventListener('submit', function(event) {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
+
+      // Send the form using Email.js.
+      // Replace "service_vvvc6l7" and "template_8i490ih" with your actual service and template IDs.
       emailjs.sendForm('service_vvvc6l7', 'template_8i490ih', this)
         .then(function() {
-          window.location.href = "/dziekujemy.html";
+          // Redirect to the thank you page on success.
+          // The path has been updated to be relative, assuming both files are in the same directory.
+          window.location.href = "thank-you.html";
         }, function(error) {
-          alert("Błąd wysyłania: " + JSON.stringify(error));
+          // Show an error message on failure.
+          // Note: The alert() function is used here for demonstration purposes.
+          // For a production application, consider using a custom modal or message box.
+          alert("Failed to send the message: " + JSON.stringify(error));
         });
     });
-  </script>
-
-</body>
+  </script>         
+    </body>     
 </html>
