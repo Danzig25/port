@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontakt | Danziger Reporter</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 20px;
+      background: #fdfdfd;
+      color: #222;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 20px 0 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+    textarea {
+      height: 160px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      border: none;
+    }
+  </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+
+  <h1>Skontaktuj się z redakcją</h1>
+
+  <form id="kontakt-form">
+    <label>Imię i nazwisko:
+      <input type="text" name="name" required>
+    </label>
+
+    <label>Adres e-mail:
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Wiadomość:
+      <textarea name="message" required></textarea>
+    </label>
+
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <script>
+    (function(){
+      emailjs.init("PGsn7ZkHeptD5mWTv");
+    })();
+
+    document.getElementById('kontakt-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_vvvc6l7', 'template_8i490ih', this)
+        .then(function() {
+          window.location.href = "/dziekujemy.html";
+        }, function(error) {
+          alert("Błąd wysyłania: " + JSON.stringify(error));
+        });
+    });
+  </script>
+
+</body>
+</html>
