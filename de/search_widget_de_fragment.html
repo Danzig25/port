@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Suche — Danziger Reporter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap">
+<style>
+  body { margin:0; padding:0; background:#f5f5f5; font-family: Arial, sans-serif; }
+  #search-container { padding:10px; border-radius:6px; border:1px solid #ddd; background:#f5f5f5; }
+  h3 { font-family: 'Old Standard TT', serif; font-size:13px; margin:0 0 8px; white-space:nowrap; }
+  input { width:100%; padding:6px 8px; border:1px solid #ccc; border-radius:4px; margin-bottom:6px; box-sizing:border-box; }
+  button { width:100%; padding:6px 0; background:linear-gradient(#4a90e2, #357ABD); border:1px solid #2d5f8a; color:#fff; font-weight:bold; border-radius:4px; cursor:pointer; }
+  .result { margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ccc; }
+  .result-title { font-weight:bold; color:#357ABD; text-decoration:none; }
+  .result-snippet { font-size:12px; color:#333; }
+</style>
+</head>
+<body>
+<div id="search-container">
+  <h3>Suche im Danziger Reporter</h3>
+  <form onsubmit="performSearch(); return false;">
+    <input type="text" id="searchInput" placeholder="Suchbegriff eingeben...">
+    <button type="submit">Suchen</button>
+  </form>
+  <div id="results"></div>
+</div>
+<script>
+let pages = [];
+
+// pages.json wczytywany z głównego katalogu
+fetch('../pages.json')
+  .then(response => response.json())
+  .then(data => { pages = data; })
+  .catch(err => console.error('Fehler beim Laden von pages.json:', err));
+
+function performSearch() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';
+  if (query.trim() === '') return;
+  const results = pages.filter(page => 
+    page.title.toLowerCase().includes(query) || page.snippet.toLowerCase().includes(query)
+  );
+  results.forEach(page => {
+    const resultDiv = document.createElement('div');
+    resultDiv.classList.add('result');
+    resultDiv.innerHTML = `<a class="result-title" href="${page.url}" target="_blank">${page.title}</a>
+      <div class="result-snippet">${page.snippet}</div>`;
+    resultsContainer.appendChild(resultDiv);
+  });
+  if (results.length === 0) {
+    resultsContainer.innerHTML = '<div>Keine Ergebnisse gefunden.</div>';
+  }
+}
+</script>
+</body>
+</html>
