@@ -27,8 +27,8 @@
 <script>
 let pages = [];
 
-// pages.json wczytywany z głównego katalogu
-fetch('../pages.json')
+// Pełny URL do pliku pages.json w katalogu de/
+fetch('https://danziger.report/de/pages.json')
   .then(response => response.json())
   .then(data => { pages = data; })
   .catch(err => console.error('Fehler beim Laden von pages.json:', err));
