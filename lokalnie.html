@@ -101,7 +101,7 @@
                 <img alt="Duży obraz artykułu" class="article-main-image" src="https://i.ibb.co/m596Vdjj/fxmozart-j.jpg?text=Duży+Obraz+Artykułu"/>
                 <p class="image-caption">
      Foto: Emil Racht </p>
-                <div class="article-body">
+                <div class="article-body" data-article-id="100825">
                     <p style=""><b>Tegoroczny, jubileuszowy, 20. Festiwal Mozartiana to więcej niż tylko hołd dla geniuszu Wolfganga Amadeusza Mozarta</b>. To także przypomnienie o mniej znanych, choć równie fascynujących wątkach z historii jego rodziny, które splatają się z losami Gdańska, Lwowa i całej Europy. W cieniu wielkiego festiwalu, na tle którego rozbrzmiewają symfonie i opery geniusza z Salzburga, wyłania się postać jego najmłodszego syna &ndash; Franza Xavera Wolfganga Mozarta. To on, choć niemal zapomniany, był realnym łącznikiem między nazwiskiem Mozart a naszym miastem. Jego życie było wielką podróżą, udokumentowaną w dziełach i listach, a przede wszystkim w jego Dzienniku podróży z lat 1819-1821, który uczy nas, że droga do własnej tożsamości często prowadzi przez odległe, nieoczywiste zakątki.</p>
                     <p style=""><b>Ciężar nazwiska i ucieczka do Lwowa.</b> Franz Xaver urodził się w 1791 roku, zaledwie kilka miesięcy przed śmiercią ojca. Całe jego życie upłynęło w cieniu, ale i w świetle genialnego nazwiska. Wychowywał się w Wiedniu, otoczony przez autorytety epoki, które dbały o jego muzyczne wykształcenie. Uczył się u takich mistrzów jak Antonio Salieri i Jan Nepomuk Hummel. Szybko ujawnił talent pianistyczny i kompozytorski, lecz każda jego nuta była porównywana z dziełami ojca. Wiedeń, centrum muzycznego świata, stał się dla niego jednocześnie sceną i pułapką. Presja oczekiwań była olbrzymia.
 W 1808 roku, w wieku 17 lat, podjął decyzję, która zaważyła na jego losach: opuścił Wiedeń i przeniósł się do Lwowa, ówczesnej stolicy Galicji. To w tym odległym, prowincjonalnym mieście, Franz Xaver znalazł przestrzeń do rozwoju z dala od wiecznie obecnego cienia ojca. Został wziętym nauczycielem muzyki, a w 1826 roku założył Lwowskie Towarzystwo Muzyczne św. Cecylii, które stało się zalążkiem dzisiejszego Lwowskiego Konserwatorium. Przez wiele lat był znany jako &bdquo;Lwowski Mozart&rdquo; &ndash; przydomek, który wyrażał uznanie dla jego talentu, ale jednocześnie podkreślał jego związek z nowym domem. To właśnie we Lwowie poczuł, że może być sobą, a nie jedynie synem legendy.&nbsp;</p>
@@ -179,5 +179,25 @@ Pianista, który sam zaczął swoją karierę we Lwowie, zanim przeniósł się 
     if (overlay) overlay.addEventListener('click', toggleMenu);
   </script>
         <script src="js/cookie-bar_smart.js"></script>
-    </body>
+    
+<script>
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('id');
+    if (!articleId) return;
+
+    const currentArticle = document.querySelector(`[data-article-id="${articleId}"]`);
+    if (!currentArticle) {
+        const archiveMap = {
+            "260725": "archiwum/lokalnie.26.07.25.Festiwal-Kina-Plenerowego-w-Sopocie.html",
+            "100825": "archiwum/lokalnie.10.08.25.Lwowski-Mozart.html"
+        };
+        if (archiveMap[articleId]) {
+            window.location.href = "/" + archiveMap[articleId];
+        }
+    }
+})();
+</script>
+
+</body>
 </html>
